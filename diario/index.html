@@ -23,84 +23,31 @@ body{background:#0b1425}main{max-width:1480px;padding:12px 18px 14px}.top.hero{p
 .top.hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at 85% 15%,rgba(66,200,232,.10),transparent 38%)}
 @media(max-width:650px){.top.hero{top:0;border-radius:0 0 14px 14px}}
 
-/* Calendario ligeiramente menor: reservar espaco para legenda e rodape */
-@media(min-width:1000px) and (min-height:690px){
-main{min-height:0;height:100dvh;box-sizing:border-box;overflow:visible}
-.panel:first-of-type{flex:0 1 auto;min-height:0}
-.calendar{flex:0 0 auto;grid-auto-rows:auto}
-.day{height:clamp(53px,7.1vh,74px);min-height:0;padding:7px}
-.week{margin:7px 0 5px}
-.legend{margin-top:8px;padding-top:7px;row-gap:5px}
-.panel{padding-top:10px;padding-bottom:9px}
-}
-@media(min-width:1000px) and (max-height:760px){
-.day{height:clamp(46px,6.8vh,58px)}
-.top.hero{padding-top:10px;padding-bottom:9px}
-.hero-meta{margin-top:7px;padding-top:7px}
-}
-
-/* Ajuste final para telas desktop de 768-1080px: calendario completo e rodape visiveis */
-@media(min-width:1000px) and (min-height:700px){
-main{height:auto;min-height:0;padding:8px 14px 8px;display:block}
-.top.hero{padding:9px 18px 8px;top:4px}
-.brand-mark.brand-mark-official{width:105px;height:62px;flex-basis:105px}
-.brand-name{font-size:35px}
-.hero-meta{margin-top:7px;padding-top:7px}
-.panel{margin-top:8px;padding:9px 14px 8px}
-.panel:first-of-type{display:block;flex:none}
-.toolbar h2{font-size:19px}
-.week{margin:6px 0 5px}
-.calendar{display:grid;grid-auto-rows:auto;gap:5px;flex:none}
-.day{height:clamp(48px,6.7dvh,64px);min-height:0;padding:6px 8px}
-.day small{font-size:10px;line-height:1.1;margin-top:2px}
-.dot{margin-top:4px}
-.legend{margin-top:7px;padding-top:7px;gap:5px 13px;font-size:10px}
-.panel>.note{margin:5px 0 0}
-.about-disclosure{margin-top:5px}
-.footer{margin-top:4px}
-}
-@media(min-width:1000px) and (min-height:700px) and (max-height:820px){
-.day{height:clamp(43px,6.3dvh,53px)}
-.brand-mark.brand-mark-official{width:92px;height:55px;flex-basis:92px}
-.brand-name{font-size:31px}
-}
-
-/* Correcao de sobreposicao: textos devem permanecer dentro dos dias */
-@media(min-width:1000px) and (min-height:700px){
-.day{height:clamp(62px,7.5dvh,72px);padding:6px 8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;overflow:hidden;gap:2px}
-.day strong{display:block;font-size:12px;line-height:1.05;flex-shrink:0}
-.day .dot{margin:2px 0 0;flex-shrink:0;width:7px;height:7px}
-.day small{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;line-height:1.15;font-size:10px;margin:0;max-width:100%}
-.day.today:after{top:5px;right:7px}
-.week{margin:5px 0 4px}
-.legend{margin-top:6px}
-}
-@media(min-width:1000px) and (min-height:700px) and (max-height:820px){
-.day{height:clamp(59px,7.3dvh,65px)}
-}
-
-/* Layout definitivo: conteudo legivel e sem sobreposicao */
+/* Calendario responsivo sem vazamento ou sobreposicao */
 @media(min-width:900px){
-.calendar{grid-auto-rows:78px!important;align-items:stretch}
-.day,.day.has,.day.today{box-sizing:border-box!important;height:78px!important;min-height:78px!important;max-height:78px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;gap:3px!important;overflow:hidden!important;padding:7px 9px!important;line-height:1.15!important}
-.day strong{font-size:13px!important;line-height:15px!important;margin:0!important;flex:0 0 auto!important}
-.day .dot{width:7px!important;height:7px!important;margin:0!important;flex:0 0 auto!important}
-.day small{display:block!important;position:static!important;font-size:10px!important;line-height:12px!important;margin:0!important;max-height:24px!important;min-height:0!important;overflow:hidden!important;white-space:normal!important;word-break:normal!important;flex:0 1 auto!important}
+main{height:auto!important;min-height:100dvh!important;display:block!important;overflow:visible!important;padding:10px 16px 16px!important}
+.top.hero{position:relative!important;top:auto!important;padding:13px 20px 12px!important;margin:0 0 10px!important}
+.hero-meta{margin-top:8px!important;padding-top:8px!important}
+.panel{margin-top:8px!important;padding:12px 16px!important}
+.panel:first-of-type{display:block!important;flex:none!important;min-height:0!important}
+.toolbar h2{font-size:20px!important}
+.week{margin:10px 0 7px!important}
+.calendar{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;grid-auto-rows:clamp(68px,9dvh,86px)!important;gap:7px!important;flex:none!important;align-items:stretch!important}
+.calendar .day,.calendar .day.has,.calendar .day.today{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:flex-start!important;height:100%!important;min-height:0!important;max-height:none!important;padding:10px!important;gap:3px!important;overflow:hidden!important;line-height:1.2!important}
+.calendar .day strong{position:static!important;display:block!important;font-size:13px!important;line-height:16px!important;margin:0!important;flex:0 0 auto!important}
+.calendar .day .dot{position:static!important;display:block!important;width:7px!important;height:7px!important;margin:5px 0 0!important;flex:0 0 auto!important}
+.calendar .day small{position:static!important;display:block!important;font-size:10px!important;line-height:12px!important;max-height:25px!important;max-width:100%!important;margin:0!important;padding:0!important;overflow:hidden!important;white-space:normal!important;overflow-wrap:anywhere!important;flex:0 1 auto!important}
+.legend{margin-top:10px!important;padding-top:9px!important;gap:7px 15px!important;font-size:11px!important}
+.panel>.note{margin:7px 0 0!important}
+.about-disclosure{margin-top:8px!important}
+.footer{margin-top:6px!important}
 }
-@media(min-width:900px) and (max-height:850px){
-.calendar{grid-auto-rows:69px!important}
-.day,.day.has,.day.today{height:69px!important;min-height:69px!important;max-height:69px!important}
+@media(min-width:900px) and (max-height:800px){
+.calendar{grid-auto-rows:clamp(60px,8.3dvh,70px)!important;gap:6px!important}
+.calendar .day{padding:7px 9px!important}
+.calendar .day .dot{margin-top:2px!important}
+.top.hero{padding:9px 18px!important}
 }
-
-/* Grade legivel: cada elemento ocupa sua faixa sem ultrapassar a celula */
-@media(min-width:900px){
-.calendar{grid-auto-rows:76px!important;row-gap:7px!important}
-.calendar .day{position:relative!important;display:block!important;height:76px!important;min-height:76px!important;max-height:76px!important;padding:8px 10px!important;overflow:hidden!important}
-.calendar .day strong{position:absolute!important;top:8px!important;left:10px!important;margin:0!important;font-size:13px!important;line-height:16px!important}
-.calendar .day .dot{position:absolute!important;top:32px!important;left:10px!important;margin:0!important;width:7px!important;height:7px!important}
-.calendar .day small{position:absolute!important;top:43px!important;bottom:5px!important;left:10px!important;right:8px!important;display:block!important;margin:0!important;padding:0!important;max-height:26px!important;line-height:12px!important;font-size:10px!important;overflow:hidden!important;white-space:normal!important;overflow-wrap:break-word!important}
-}
-
 /* Tema claro opcional, persistido no navegador */
 body[data-theme="light"]{--bg:#f3f7fc;--panel:#fff;--panel2:#eaf1fa;--line:#cbd8e9;--text:#16273f;--muted:#50657f;--cyan:#007fa3;--purple:#7556c9;--green:#07845c;background:#f3f7fc!important;color:var(--text)}
 body[data-theme="light"] .header,body[data-theme="light"] .hero{background:linear-gradient(125deg,#fff,#eaf2fd)!important}
@@ -114,6 +61,15 @@ body[data-theme="light"] .button,body[data-theme="light"] .hero-nav{background:#
 body[data-theme="light"] .timeline-header,body[data-theme="light"] .group{background:#eaf1fa;color:#16273f}
 .theme-toggle{position:fixed;right:18px;bottom:16px;z-index:1500;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 4px 20px #0002;cursor:pointer;font:600 12px "Segoe UI",Arial,sans-serif}
 .theme-toggle:hover{border-color:var(--cyan)}
+body[data-theme="light"] .hero .brand-name{color:#172943!important}
+body[data-theme="light"] .hero .brand-name span{color:#007fa3!important}
+body[data-theme="light"] .hero .hero-subtitle,body[data-theme="light"] .hero .meta-value,body[data-theme="light"] .hero .today-status{color:#263d57!important}
+body[data-theme="light"] .hero .meta-label{color:#50657f!important}
+body[data-theme="light"] .hero .eyebrow{color:#007fa3!important}
+body[data-theme="light"] .hero .today-status strong{color:#172943!important}
+body[data-theme="light"] .hero .hero-nav{border-color:#a9c0d8!important}
+body[data-theme="light"] .top.hero:after{opacity:.25}
+@media(min-width:900px){.top.hero{position:sticky!important;top:4px!important}}
 </style></head><body><button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro e escuro">☀ Tema claro</button><main>
 <header class="top hero"><div class="hero-head"><div class="brand"><div class="brand-mark brand-mark-official"><img src="../neurodyn.png" alt="Logotipo oficial NeuroDyn: cérebro com ondas de EEG e conexões neurais" width="240" height="150" loading="eager"></div><div><div class="eyebrow">PESQUISA DOUTORAL · UFMA</div><h1 class="brand-name">Neuro<span>Dyn</span></h1><p class="hero-subtitle">Diário Científico · Engenharia Elétrica</p></div></div><div class="hero-nav-group"><a class="hero-nav" href="../">← Voltar ao cronograma de Gantt</a><div class="today-status" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><span>Hoje é dia <strong id="todayDate">—</strong></span></div></div></div><div class="hero-meta"><div class="meta-item"><span class="meta-label">Pesquisadora</span><span class="meta-value">Renata Costa Rocha</span></div><div class="meta-item"><span class="meta-label">Programa</span><span class="meta-value">Doutorado em Engenharia Elétrica · UFMA</span></div><div class="meta-item"><span class="meta-label">Linha de pesquisa</span><span class="meta-value">Automação e Controle</span></div><div class="meta-item"><span class="meta-label">Marco fundador</span><span class="meta-value">18 de novembro de 2026</span></div></div></header>
 <section class="panel"><div class="toolbar"><button class="button" id="prev" aria-label="Mês anterior">←</button><h2 id="month"></h2><button class="button" id="next" aria-label="Próximo mês">→</button></div>
