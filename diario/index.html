@@ -10,7 +10,7 @@ main{max-width:1150px;margin:auto;padding:30px 18px}a{color:var(--cyan)}.top{dis
 <section class="panel"><div class="toolbar"><button class="button" id="prev" aria-label="Mês anterior">←</button><h2 id="month"></h2><button class="button" id="next" aria-label="Próximo mês">→</button></div>
 <div class="week"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div><div id="calendar" class="calendar"></div><div class="legend"><span class="dot"></span>Data com registro documentado · clique para abrir</div></section>
 <section class="panel"><h2>Sobre os registros</h2><p>O calendário começa em setembro de 2026. Os registros retrospectivos são resumos de marcos conhecidos, não transcrições de um diário escrito na própria data. Datas sem evidência confirmada permanecem vazias.</p><p class="note">Esta página é pública. Resultados científicos detalhados, dados sensíveis e anotações internas devem permanecer no repositório privado do NeuroDyn.</p></section>
-<dialog id="popup" class="dialog"><button class="button close" id="close" aria-label="Fechar">✕</button><div class="tag" id="date"></div><h2 id="title"></h2><div id="details" class="entry"></div></dialog>
+<dialog id="popup" class="dialog"><button class="button close" id="close" aria-label="Fechar">✕</button><div class="tag" id="date"></div><h2 id="title"></h2><div id="details" class="entry"></div><div id="sources" class="entry" hidden><strong>Fontes e rastreabilidade</strong><div id="sourceLinks"></div><p class="note">Os links são evidências e referências relacionadas ao tema; um commit posterior não comprova que a atividade ocorreu na data do diário.</p></div></dialog>
 <div class="footer">NeuroDyn · Universidade Federal do Maranhão · Pesquisa em desenvolvimento</div></main>
 <script>
 let cursor=new Date(2026,10,1);
@@ -19,38 +19,147 @@ const records={
   "2026-11-08": {
     "title": "Em busca de uma pergunta científica",
     "type": "Investigação",
-    "details": "O QUE FIZ\nInvestiguei grandes questões da neurociência e possibilidades de estudar doenças psiquiátricas com EEG. Considerei depressão, TOC e transtornos relacionados ao uso de álcool e outras substâncias. Examinei as bases HBN, UCI Alcoholism EEG, ds005907 e COGA, além de um estudo com metanfetamina.\n\nO QUE OBSERVEI\nAs bases encontradas apresentavam limitações de tamanho amostral, acesso aos sinais individuais ou cobertura espacial. Não confirmei uma base que atendesse simultaneamente a todos os critérios.\n\nDECISÕES\nNão focar em previsão de recaídas. Priorizar uma pergunta médica relevante e dados brutos acessíveis; adotar, nesta busca, a meta de pelo menos 300 participantes com informações clínicas adequadas.\n\nHIPÓTESES EM ABERTO\nAlterações da dinâmica cerebral poderiam ajudar a compreender processos de decisão, recompensa e regulação do comportamento. Ainda não havia hipótese operacional nem base selecionada.\n\nREFLEXÃO\nPercebi que uma base grande não basta: ela precisa permitir responder a uma pergunta científica relevante."
+    "details": "O QUE FIZ\nInvestiguei grandes questões da neurociência e possibilidades de estudar doenças psiquiátricas com EEG. Considerei depressão, TOC e transtornos relacionados ao uso de álcool e outras substâncias. Examinei as bases HBN, UCI Alcoholism EEG, ds005907 e COGA, além de um estudo com metanfetamina.\n\nO QUE OBSERVEI\nAs bases encontradas apresentavam limitações de tamanho amostral, acesso aos sinais individuais ou cobertura espacial. Não confirmei uma base que atendesse simultaneamente a todos os critérios.\n\nDECISÕES\nNão focar em previsão de recaídas. Priorizar uma pergunta médica relevante e dados brutos acessíveis; adotar, nesta busca, a meta de pelo menos 300 participantes com informações clínicas adequadas.\n\nHIPÓTESES EM ABERTO\nAlterações da dinâmica cerebral poderiam ajudar a compreender processos de decisão, recompensa e regulação do comportamento. Ainda não havia hipótese operacional nem base selecionada.\n\nREFLEXÃO\nPercebi que uma base grande não basta: ela precisa permitir responder a uma pergunta científica relevante.",
+    "links": [
+      {
+        "title": "Repositório da pesquisa com UCI",
+        "url": "https://github.com/ahcorataner/Doutorado_UCI_EEG",
+        "note": "Contexto da investigação; não comprova execução em 08/11"
+      },
+      {
+        "title": "Repositório NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn",
+        "note": "Projeto desenvolvido posteriormente"
+      }
+    ]
   },
   "2026-11-09": {
     "title": "Auditoria da base UCI EEG",
     "type": "Marco experimental",
-    "details": "O QUE FIZ\nAvancei na auditoria da UCI EEG Alcoholism Database, avaliando integridade dos ensaios, condições experimentais e problemas de canais.\n\nO QUE OBSERVEI\nA base tem 122 participantes e registros de 64 canais. A auditoria identificou problemas estruturais e canais constantes em parte dos ensaios, exigindo critérios explícitos de qualidade.\n\nDECISÕES\nManter rastreabilidade dos arquivos e tratar qualidade dos sinais antes de qualquer avaliação preditiva.\n\nHIPÓTESES EM ABERTO\nAinda era necessário demonstrar que a base sustentaria uma contribuição matemática além da classificação de grupos."
+    "details": "O QUE FIZ\nAvancei na auditoria da UCI EEG Alcoholism Database, avaliando integridade dos ensaios, condições experimentais e problemas de canais.\n\nO QUE OBSERVEI\nA base tem 122 participantes e registros de 64 canais. A auditoria identificou problemas estruturais e canais constantes em parte dos ensaios, exigindo critérios explícitos de qualidade.\n\nDECISÕES\nManter rastreabilidade dos arquivos e tratar qualidade dos sinais antes de qualquer avaliação preditiva.\n\nHIPÓTESES EM ABERTO\nAinda era necessário demonstrar que a base sustentaria uma contribuição matemática além da classificação de grupos.",
+    "links": [
+      {
+        "title": "Auditoria estrutural UCI — commit",
+        "url": "https://github.com/ahcorataner/Doutorado_UCI_EEG/commit/bb29862578b722cc962fe103f167c99992607d58",
+        "note": "Evidência versionada da auditoria"
+      },
+      {
+        "title": "Validação de canais — commit",
+        "url": "https://github.com/ahcorataner/Doutorado_UCI_EEG/commit/fc88d2de2ff8ef551a2d2db4c0a3ed9c71d31d67",
+        "note": "Qualidade dos canais"
+      }
+    ]
   },
   "2026-11-11": {
     "title": "Revisão de literatura e identificação dinâmica",
     "type": "Literatura",
-    "details": "O QUE FIZ\nLi um artigo de 2024 da Scientific Reports que utiliza a base UCI Alcoholism EEG e combina seleção de características, LSTM e redes neurais. Procurei entender a proposta de CNNs e LSTMs multiestágio.\n\nO QUE OBSERVEI\nO artigo relata acurácia de 99,59%. Isso reforçou minha preocupação de que buscar apenas mais acurácia não seria suficiente para sustentar a originalidade da tese. O valor é um resultado relatado pelos autores, não uma validação independente minha.\n\nDECISÕES\nExplorar propriedades dinâmicas do EEG — estabilidade, memória e resposta a estímulos — em vez de depender exclusivamente de classificadores.\n\nHIPÓTESES EM ABERTO\nA identificação de sistemas poderia revelar propriedades relevantes, mas a lacuna científica e a viabilidade ainda precisavam ser verificadas.\n\nREFERÊNCIA\nManivannan et al., Scientific Reports (2024), DOI: 10.1038/s41598-024-72926-7."
+    "details": "O QUE FIZ\nLi um artigo de 2024 da Scientific Reports que utiliza a base UCI Alcoholism EEG e combina seleção de características, LSTM e redes neurais. Procurei entender a proposta de CNNs e LSTMs multiestágio.\n\nO QUE OBSERVEI\nO artigo relata acurácia de 99,59%. Isso reforçou minha preocupação de que buscar apenas mais acurácia não seria suficiente para sustentar a originalidade da tese. O valor é um resultado relatado pelos autores, não uma validação independente minha.\n\nDECISÕES\nExplorar propriedades dinâmicas do EEG — estabilidade, memória e resposta a estímulos — em vez de depender exclusivamente de classificadores.\n\nHIPÓTESES EM ABERTO\nA identificação de sistemas poderia revelar propriedades relevantes, mas a lacuna científica e a viabilidade ainda precisavam ser verificadas.\n\nREFERÊNCIA\nManivannan et al., Scientific Reports (2024), DOI: 10.1038/s41598-024-72926-7.",
+    "links": [
+      {
+        "title": "Artigo Scientific Reports (DOI)",
+        "url": "https://doi.org/10.1038/s41598-024-72926-7",
+        "note": "Referência bibliográfica analisada"
+      },
+      {
+        "title": "Histórico do projeto UCI",
+        "url": "https://github.com/ahcorataner/Doutorado_UCI_EEG/commits",
+        "note": "Contexto experimental; datas dos commits independentes do diário"
+      }
+    ]
   },
   "2026-11-12": {
     "title": "Concepção inicial da HSD-Net",
     "type": "Decisão metodológica",
-    "details": "O QUE FIZ\nReavaliei experimentos anteriores sem resultados conclusivos para uma assinatura ligada ao alcoolismo. Estudei EEGNet, EEG Conformer, Transformers, redes em grafos, S4/Mamba e Neural ODE. Discuti propostas preliminares, como CREDO-EEG, e a técnica estatística do professor Jonathan.\n\nO QUE OBSERVEI\nCombinar técnicas existentes não garante originalidade. A técnica do Jonathan, originalmente aplicada a sinais cardíacos, poderia inspirar descritores estatísticos para EEG, mas sua utilidade adicional precisava ser demonstrada.\n\nDECISÕES\nConcebi, apenas no plano teórico, a HSD-Net: um ramo estatístico inspirado na abordagem do Jonathan e um ramo dinâmico baseado em EEGNet. Planejei comparar EEGNet isolado, estatísticas isoladas, fusão simples e um mecanismo novo, respeitando separação por participante.\n\nHIPÓTESES EM ABERTO\nUma integração estatístico-dinâmica poderia produzir representações mais estáveis e complementares. Não implementei nem validei a HSD-Net neste dia.\n\nREFLEXÃO\nA originalidade terá de estar em um mecanismo matemático justificável e em sua validação, não apenas no nome de uma arquitetura."
+    "details": "O QUE FIZ\nReavaliei experimentos anteriores sem resultados conclusivos para uma assinatura ligada ao alcoolismo. Estudei EEGNet, EEG Conformer, Transformers, redes em grafos, S4/Mamba e Neural ODE. Discuti propostas preliminares, como CREDO-EEG, e a técnica estatística do professor Jonathan.\n\nO QUE OBSERVEI\nCombinar técnicas existentes não garante originalidade. A técnica do Jonathan, originalmente aplicada a sinais cardíacos, poderia inspirar descritores estatísticos para EEG, mas sua utilidade adicional precisava ser demonstrada.\n\nDECISÕES\nConcebi, apenas no plano teórico, a HSD-Net: um ramo estatístico inspirado na abordagem do Jonathan e um ramo dinâmico baseado em EEGNet. Planejei comparar EEGNet isolado, estatísticas isoladas, fusão simples e um mecanismo novo, respeitando separação por participante.\n\nHIPÓTESES EM ABERTO\nUma integração estatístico-dinâmica poderia produzir representações mais estáveis e complementares. Não implementei nem validei a HSD-Net neste dia.\n\nREFLEXÃO\nA originalidade terá de estar em um mecanismo matemático justificável e em sua validação, não apenas no nome de uma arquitetura.",
+    "links": [
+      {
+        "title": "Repositório experimental UCI",
+        "url": "https://github.com/ahcorataner/Doutorado_UCI_EEG",
+        "note": "Contexto dos experimentos anteriores"
+      },
+      {
+        "title": "Histórico de commits NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commits",
+        "note": "Desenvolvimento subsequente; HSD-Net permaneceu conceitual"
+      }
+    ]
   },
   "2026-11-19": {
     "title": "Balanço dos experimentos NeuroDyn",
     "type": "Resultados",
-    "details": "O QUE FIZ\nConsolidei os experimentos sintéticos E15–E19 e a aplicação inicial em EEG real da HBN. Analisei as estatísticas A3 e A6 como candidatas à caracterização de assimetria temporal.\n\nO QUE OBSERVEI\nNo experimento sintético E19.2, as taxas de detecção foram 6% (controle gaussiano), 2% (quadrático), 5% (exponencial) e 100% nos dois cenários de shot noise, sob as condições simuladas. A leitura dos 20 arquivos EEG foi bem-sucedida; a seleção inicial pelo canal E1 excluiu dois participantes por constância do canal. Esses são resultados de etapas específicas, não evidência de utilidade clínica.\n\nDECISÕES\nNão repetir auditorias desnecessariamente, não forçar resultados positivos e não antecipar classificação de transtornos. Priorizar qualidade dos canais, controles estatísticos, reprodutibilidade e comparação com métodos convencionais.\n\nHIPÓTESES EM ABERTO\nA3/A6 poderiam identificar propriedades temporais complementares no EEG real. Ainda faltava demonstrar que os efeitos não decorriam de artefatos e que eram reproduzíveis.\n\nREFLEXÃO\nJá havia uma prova de conceito sintética, mas não uma assinatura neurofisiológica validada."
+    "details": "O QUE FIZ\nConsolidei os experimentos sintéticos E15–E19 e a aplicação inicial em EEG real da HBN. Analisei as estatísticas A3 e A6 como candidatas à caracterização de assimetria temporal.\n\nO QUE OBSERVEI\nNo experimento sintético E19.2, as taxas de detecção foram 6% (controle gaussiano), 2% (quadrático), 5% (exponencial) e 100% nos dois cenários de shot noise, sob as condições simuladas. A leitura dos 20 arquivos EEG foi bem-sucedida; a seleção inicial pelo canal E1 excluiu dois participantes por constância do canal. Esses são resultados de etapas específicas, não evidência de utilidade clínica.\n\nDECISÕES\nNão repetir auditorias desnecessariamente, não forçar resultados positivos e não antecipar classificação de transtornos. Priorizar qualidade dos canais, controles estatísticos, reprodutibilidade e comparação com métodos convencionais.\n\nHIPÓTESES EM ABERTO\nA3/A6 poderiam identificar propriedades temporais complementares no EEG real. Ainda faltava demonstrar que os efeitos não decorriam de artefatos e que eram reproduzíveis.\n\nREFLEXÃO\nJá havia uma prova de conceito sintética, mas não uma assinatura neurofisiológica validada.",
+    "links": [
+      {
+        "title": "E20.1 — auditoria EEG",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/src/experiments/e20_1_auditoria_eeg.py",
+        "note": "Script experimental"
+      },
+      {
+        "title": "E20.3 — assinaturas EEG",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/src/experiments/e20_3_assinaturas_eeg.py",
+        "note": "Extração A3/A6"
+      },
+      {
+        "title": "E20.4 — diagnóstico de canais",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/src/experiments/e20_4_diagnostico_canais.py",
+        "note": "Diagnóstico do canal E1"
+      },
+      {
+        "title": "Commit E20 — implementação inicial",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commit/6023b862d174c40aa217f95e65634f6a36700a4b",
+        "note": "Arquivos e resultados versionados"
+      }
+    ]
   },
   "2026-11-20": {
     "title": "Retorno à proposta e foco matemático",
     "type": "Consolidação",
-    "details": "O QUE FIZ\nRetomei a proposta oficial de doutorado e discuti como preservar a pergunta sobre transtornos psiquiátricos pediátricos, agora com a HBN como base principal de EEG. Reexaminei a técnica do professor Jonathan, originalmente desenvolvida para ECG, e a possibilidade de adaptá-la a estatísticas temporais multicanais. Organizei a apresentação da pesquisa e o planejamento científico.\n\nO QUE OBSERVEI\nA base EEG escolhida não oferecia ECG pareado utilizável para a implementação multimodal inicial. Os resultados sintéticos são promissores em cenários controlados, mas os testes em EEG real ainda não demonstraram ganho consistente frente a descritores convencionais. A originalidade do método continua por demonstrar.\n\nDECISÕES\nPriorizar a formulação e a validação matemática antes de desenvolver o software ou investigar associações clínicas. Manter como objetivos futuros um artigo metodológico, um artigo de aplicação neurofisiológica e um software científico reprodutível.\n\nHIPÓTESES EM ABERTO\nEstatísticas de ordem superior das variações temporais do EEG poderiam ser robustas, reproduzíveis e complementares a métodos espectrais; sua evolução temporal poderia, se justificado, alimentar modelos de identificação de sistemas.\n\nPRÓXIMOS PASSOS\nDiscutir a direção com o orientador, distinguir a técnica original do Jonathan das extensões propostas e estabelecer critérios quantitativos de validação.\n\nREFLEXÃO\nQuero que o software seja consequência de uma contribuição científica demonstrada, e não seu ponto de partida."
+    "details": "O QUE FIZ\nRetomei a proposta oficial de doutorado e discuti como preservar a pergunta sobre transtornos psiquiátricos pediátricos, agora com a HBN como base principal de EEG. Reexaminei a técnica do professor Jonathan, originalmente desenvolvida para ECG, e a possibilidade de adaptá-la a estatísticas temporais multicanais. Organizei a apresentação da pesquisa e o planejamento científico.\n\nO QUE OBSERVEI\nA base EEG escolhida não oferecia ECG pareado utilizável para a implementação multimodal inicial. Os resultados sintéticos são promissores em cenários controlados, mas os testes em EEG real ainda não demonstraram ganho consistente frente a descritores convencionais. A originalidade do método continua por demonstrar.\n\nDECISÕES\nPriorizar a formulação e a validação matemática antes de desenvolver o software ou investigar associações clínicas. Manter como objetivos futuros um artigo metodológico, um artigo de aplicação neurofisiológica e um software científico reprodutível.\n\nHIPÓTESES EM ABERTO\nEstatísticas de ordem superior das variações temporais do EEG poderiam ser robustas, reproduzíveis e complementares a métodos espectrais; sua evolução temporal poderia, se justificado, alimentar modelos de identificação de sistemas.\n\nPRÓXIMOS PASSOS\nDiscutir a direção com o orientador, distinguir a técnica original do Jonathan das extensões propostas e estabelecer critérios quantitativos de validação.\n\nREFLEXÃO\nQuero que o software seja consequência de uma contribuição científica demonstrada, e não seu ponto de partida.",
+    "links": [
+      {
+        "title": "README científico NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/README.md",
+        "note": "Fundamentação e estado da pesquisa"
+      },
+      {
+        "title": "E20.10 — benchmark corrigido",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commit/1902b0060be6b3758661e7ff9f527ced1d4d74fc",
+        "note": "Validação e comparação de métodos"
+      },
+      {
+        "title": "E20.11 — interpretação corrigida",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commit/89043dbe56272af0a0bf623c837aeca63c7949ba",
+        "note": "Rastreabilidade da revisão científica"
+      },
+      {
+        "title": "Cronograma científico",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/docs/cronograma_doutorado.md",
+        "note": "Planejamento acadêmico"
+      }
+    ]
+  },
+  "2026-11-17": {
+    "title": "Retomada da proposta original e investigação do método",
+    "type": "Reflexão metodológica",
+    "details": "O QUE FIZ\nRetomei a proposta de doutorado apresentada à UFMA e examinei possibilidades de manter o foco em transtornos psiquiátricos pediátricos, utilizando EEG da HBN. Discuti assinaturas transdiagnósticas, identificação de sistemas e a possível adaptação da abordagem estatística do professor Jonathan, originalmente desenvolvida para ECG.\n\nO QUE OBSERVEI\nA ausência de ECG pareado utilizável na base EEG escolhida exigia revisar a implementação multimodal inicial. A utilização de momentos estatísticos no EEG, isoladamente, não constitui inovação comprovada.\n\nDECISÕES\nManter a pergunta neuropsiquiátrica da proposta original. Investigar primeiro se a técnica estatística oferece informação complementar e reprodutível, antes de investir em uma plataforma de software ou em classificadores clínicos.\n\nHIPÓTESES EM ABERTO\nA evolução temporal de estatísticas de ordem superior poderia oferecer uma representação útil para identificação de dinâmicas cerebrais e, futuramente, associações com dimensões de sintomas.\n\nREFLEXÃO\nQuero uma contribuição matemática demonstrável, conectada à pergunta médica, e não apenas uma arquitetura mais complexa.\n\nNOTA DE PROVENIÊNCIA\nRegistro retrospectivo atribuído a 17/11 por confirmação da pesquisadora. O texto-base também fundamenta a consolidação registrada em 20/11.",
+    "links": [
+      {
+        "title": "README científico NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/README.md",
+        "note": "Documentação consolidada posteriormente"
+      },
+      {
+        "title": "Histórico do NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commits",
+        "note": "Evolução posterior da metodologia"
+      }
+    ]
   }
 };
 
 const monthEl=document.getElementById("month"),grid=document.getElementById("calendar"),popup=document.getElementById("popup");
 function render(){monthEl.textContent=cursor.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});grid.replaceChildren();let y=cursor.getFullYear(),m=cursor.getMonth(),offset=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate();for(let i=0;i<offset;i++){let el=document.createElement("div");el.className="day empty";grid.append(el)}for(let d=1;d<=n;d++){let key=[y,String(m+1).padStart(2,"0"),String(d).padStart(2,"0")].join("-"),r=records[key],el=document.createElement("button");el.className="day"+(r?" has":"");el.type="button";let number=document.createElement("strong");number.textContent=d;el.append(number);if(r){let dot=document.createElement("span");dot.className="dot";el.append(dot);let label=document.createElement("small");label.textContent=r.type;el.append(label)}el.setAttribute("aria-label",key+(r?": "+r.title:": sem registro"));el.onclick=()=>openDay(key);grid.append(el)}document.getElementById("prev").disabled=cursor<=first}
-function openDay(key){let r=records[key];document.getElementById("date").textContent=key.split("-").reverse().join("/")+(r?" · "+r.type:"");document.getElementById("title").textContent=r?r.title:"Sem registro documentado";document.getElementById("details").textContent=r?r.details:"Nenhuma atividade documentada nesta data.";popup.showModal()}
+function openDay(key){let r=records[key];document.getElementById("date").textContent=key.split("-").reverse().join("/")+(r?" · "+r.type:"");document.getElementById("title").textContent=r?r.title:"Sem registro documentado";document.getElementById("details").textContent=r?r.details:"Nenhuma atividade documentada nesta data.";const sources=document.getElementById("sources"),list=document.getElementById("sourceLinks");list.replaceChildren();if(r&&r.links&&r.links.length){sources.hidden=false;for(const item of r.links){const p=document.createElement("p");const a=document.createElement("a");a.href=item.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=item.title;const note=document.createElement("small");note.style.display="block";note.style.color="var(--muted)";note.textContent=item.note;p.append(a,note);list.append(p)}}else sources.hidden=true;popup.showModal()}
 document.getElementById("prev").onclick=()=>{cursor.setMonth(cursor.getMonth()-1);render()};
 document.getElementById("next").onclick=()=>{cursor.setMonth(cursor.getMonth()+1);render()};
 document.getElementById("close").onclick=()=>popup.close();popup.onclick=e=>{if(e.target===popup)popup.close()};render();
