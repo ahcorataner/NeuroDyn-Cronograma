@@ -91,7 +91,30 @@ main{height:auto;min-height:0;padding:8px 14px 8px;display:block}
 .calendar{grid-auto-rows:69px!important}
 .day,.day.has,.day.today{height:69px!important;min-height:69px!important;max-height:69px!important}
 }
-</style></head><body><main>
+
+/* Grade legivel: cada elemento ocupa sua faixa sem ultrapassar a celula */
+@media(min-width:900px){
+.calendar{grid-auto-rows:76px!important;row-gap:7px!important}
+.calendar .day{position:relative!important;display:block!important;height:76px!important;min-height:76px!important;max-height:76px!important;padding:8px 10px!important;overflow:hidden!important}
+.calendar .day strong{position:absolute!important;top:8px!important;left:10px!important;margin:0!important;font-size:13px!important;line-height:16px!important}
+.calendar .day .dot{position:absolute!important;top:32px!important;left:10px!important;margin:0!important;width:7px!important;height:7px!important}
+.calendar .day small{position:absolute!important;top:43px!important;bottom:5px!important;left:10px!important;right:8px!important;display:block!important;margin:0!important;padding:0!important;max-height:26px!important;line-height:12px!important;font-size:10px!important;overflow:hidden!important;white-space:normal!important;overflow-wrap:break-word!important}
+}
+
+/* Tema claro opcional, persistido no navegador */
+body[data-theme="light"]{--bg:#f3f7fc;--panel:#fff;--panel2:#eaf1fa;--line:#cbd8e9;--text:#16273f;--muted:#50657f;--cyan:#007fa3;--purple:#7556c9;--green:#07845c;background:#f3f7fc!important;color:var(--text)}
+body[data-theme="light"] .header,body[data-theme="light"] .hero{background:linear-gradient(125deg,#fff,#eaf2fd)!important}
+body[data-theme="light"] .day.pre{--category-bg:#e7edf5;--category-border:#a0aec1;--category-title:#26384f;--category-label:#435770}
+body[data-theme="light"] .day.founder{--category-bg:#fff0ce;--category-border:#c28a1f;--category-title:#704900;--category-label:#704900}
+body[data-theme="light"] .day.research{--category-bg:#ddf5fb;--category-border:#1684a3;--category-title:#07556a;--category-label:#07556a}
+body[data-theme="light"] .panel,body[data-theme="light"] .card{background:var(--panel)}
+body[data-theme="light"] .day:not(.has){background:var(--panel2)}
+body[data-theme="light"] .day.empty{background:transparent}
+body[data-theme="light"] .button,body[data-theme="light"] .hero-nav{background:#eaf1fa;color:#16273f}
+body[data-theme="light"] .timeline-header,body[data-theme="light"] .group{background:#eaf1fa;color:#16273f}
+.theme-toggle{position:fixed;right:18px;bottom:16px;z-index:1500;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 4px 20px #0002;cursor:pointer;font:600 12px "Segoe UI",Arial,sans-serif}
+.theme-toggle:hover{border-color:var(--cyan)}
+</style></head><body><button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro e escuro">☀ Tema claro</button><main>
 <header class="top hero"><div class="hero-head"><div class="brand"><div class="brand-mark brand-mark-official"><img src="../neurodyn.png" alt="Logotipo oficial NeuroDyn: cérebro com ondas de EEG e conexões neurais" width="240" height="150" loading="eager"></div><div><div class="eyebrow">PESQUISA DOUTORAL · UFMA</div><h1 class="brand-name">Neuro<span>Dyn</span></h1><p class="hero-subtitle">Diário Científico · Engenharia Elétrica</p></div></div><div class="hero-nav-group"><a class="hero-nav" href="../">← Voltar ao cronograma de Gantt</a><div class="today-status" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><span>Hoje é dia <strong id="todayDate">—</strong></span></div></div></div><div class="hero-meta"><div class="meta-item"><span class="meta-label">Pesquisadora</span><span class="meta-value">Renata Costa Rocha</span></div><div class="meta-item"><span class="meta-label">Programa</span><span class="meta-value">Doutorado em Engenharia Elétrica · UFMA</span></div><div class="meta-item"><span class="meta-label">Linha de pesquisa</span><span class="meta-value">Automação e Controle</span></div><div class="meta-item"><span class="meta-label">Marco fundador</span><span class="meta-value">18 de novembro de 2026</span></div></div></header>
 <section class="panel"><div class="toolbar"><button class="button" id="prev" aria-label="Mês anterior">←</button><h2 id="month"></h2><button class="button" id="next" aria-label="Próximo mês">→</button></div>
 <div class="week"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div><div id="calendar" class="calendar"></div><div class="legend" aria-label="Legenda das fases da pesquisa"><span class="legend-item"><span class="legend-swatch pre" aria-hidden="true"></span><span><strong>Até 17/11 · Fundamentação</strong> — estudos anteriores ao NeuroDyn</span></span><span class="legend-item"><span class="legend-swatch founder" aria-hidden="true"></span><span><strong>18/11 · Marco fundador</strong> — criação do NeuroDyn</span></span><span class="legend-item"><span class="legend-swatch research" aria-hidden="true"></span><span><strong>19/11 em diante · Metodologia</strong> — desenvolvimento e validação matemática</span></span><span class="legend-item"><span class="legend-swatch today" aria-hidden="true"></span><span><strong>Contorno vermelho</strong> — dia de hoje (atualização automática)</span></span></div><p class="note">Clique em uma data destacada para consultar o registro, as decisões, as hipóteses e as referências.</p></section>
@@ -274,4 +297,13 @@ function openDay(key){let r=records[key];document.getElementById("date").textCon
 document.getElementById("prev").onclick=()=>{cursor.setMonth(cursor.getMonth()-1);render()};
 document.getElementById("next").onclick=()=>{cursor.setMonth(cursor.getMonth()+1);render()};
 document.getElementById("close").onclick=()=>popup.close();popup.onclick=e=>{if(e.target===popup)popup.close()};render();document.addEventListener("visibilitychange",()=>{if(!document.hidden)updateToday()});setInterval(updateToday,60000);
+</script><script>
+(function(){
+ const key="neurodyn-theme";
+ const button=document.getElementById("themeToggle");
+ function apply(theme){document.body.dataset.theme=theme;button.textContent=theme==="light"?"☾ Tema escuro":"☀ Tema claro";button.setAttribute("aria-pressed",String(theme==="light"))}
+ let saved="dark";try{saved=localStorage.getItem(key)==="light"?"light":"dark"}catch(e){}
+ apply(saved);
+ button.addEventListener("click",function(){const next=document.body.dataset.theme==="light"?"dark":"light";apply(next);try{localStorage.setItem(key,next)}catch(e){}});
+})();
 </script></body></html>
