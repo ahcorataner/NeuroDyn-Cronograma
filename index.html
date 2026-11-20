@@ -569,10 +569,38 @@ footer{padding:8px;font-size:10px;line-height:1.35}
 .brand-row .logo{height:100px;max-height:100px}
 .header{padding-top:7px;padding-bottom:7px}
 }
+
+/* Cabecalho horizontal compacto, alinhado ao Diario */
+@media(min-width:901px){
+.header{position:relative;min-height:0;padding:13px 25px!important;border-radius:20px}
+.brand-row{grid-template-columns:145px minmax(0,1fr)180px!important;gap:18px!important;align-items:center}
+.brand-row .logo{width:100%!important;height:104px!important;max-height:104px!important;max-width:180px!important;object-fit:contain}
+.institution h2{font-size:17px!important;margin:0 0 4px!important}
+.institution p{font-size:11px!important;line-height:1.35!important;margin:0!important}
+.project-title{margin:2px 0 0!important}
+.project-title h1{font-size:26px!important;margin:1px 0!important;line-height:1.05!important}
+.project-title h3{font-size:12px!important;line-height:1.3!important;margin:3px auto!important;max-width:1000px}
+.people{margin-top:6px!important;gap:34px!important}
+.person span{margin-bottom:2px!important}
+}
+
+/* Tema claro opcional, persistido no navegador */
+body[data-theme="light"]{--bg:#f3f7fc;--panel:#fff;--panel2:#eaf1fa;--line:#cbd8e9;--text:#16273f;--muted:#50657f;--cyan:#007fa3;--purple:#7556c9;--green:#07845c;background:#f3f7fc!important;color:var(--text)}
+body[data-theme="light"] .header,body[data-theme="light"] .hero{background:linear-gradient(125deg,#fff,#eaf2fd)!important}
+body[data-theme="light"] .day.pre{--category-bg:#e7edf5;--category-border:#a0aec1;--category-title:#26384f;--category-label:#435770}
+body[data-theme="light"] .day.founder{--category-bg:#fff0ce;--category-border:#c28a1f;--category-title:#704900;--category-label:#704900}
+body[data-theme="light"] .day.research{--category-bg:#ddf5fb;--category-border:#1684a3;--category-title:#07556a;--category-label:#07556a}
+body[data-theme="light"] .panel,body[data-theme="light"] .card{background:var(--panel)}
+body[data-theme="light"] .day:not(.has){background:var(--panel2)}
+body[data-theme="light"] .day.empty{background:transparent}
+body[data-theme="light"] .button,body[data-theme="light"] .hero-nav{background:#eaf1fa;color:#16273f}
+body[data-theme="light"] .timeline-header,body[data-theme="light"] .group{background:#eaf1fa;color:#16273f}
+.theme-toggle{position:fixed;right:18px;bottom:16px;z-index:1500;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 4px 20px #0002;cursor:pointer;font:600 12px "Segoe UI",Arial,sans-serif}
+.theme-toggle:hover{border-color:var(--cyan)}
 </style>
 </head>
 
-<body>
+<body><button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro e escuro">☀ Tema claro</button>
 <div class="container">
 
 <!-- CABECALHO INSTITUCIONAL -->
@@ -1039,5 +1067,14 @@ container.appendChild(defense);
 
 </script>
 
-</body>
+<script>
+(function(){
+ const key="neurodyn-theme";
+ const button=document.getElementById("themeToggle");
+ function apply(theme){document.body.dataset.theme=theme;button.textContent=theme==="light"?"☾ Tema escuro":"☀ Tema claro";button.setAttribute("aria-pressed",String(theme==="light"))}
+ let saved="dark";try{saved=localStorage.getItem(key)==="light"?"light":"dark"}catch(e){}
+ apply(saved);
+ button.addEventListener("click",function(){const next=document.body.dataset.theme==="light"?"dark":"light";apply(next);try{localStorage.setItem(key,next)}catch(e){}});
+})();
+</script></body>
 </html>
