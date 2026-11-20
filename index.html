@@ -633,6 +633,24 @@ body[data-theme="light"] .timeline-header,body[data-theme="light"] .group{backgr
 .brand-row .logo{height:88px!important;max-height:88px!important}
 .project-title{position:static!important;margin-top:8px!important;border-top:1px solid var(--line)!important;padding-top:8px!important}
 }
+
+/* Cabecalho editorial NeuroDyn: credenciais UFMA a esquerda e marca em destaque */
+.neuro-header{display:grid!important;grid-template-columns:minmax(215px,26%) minmax(0,1fr)!important;align-items:center!important;gap:24px!important;padding:18px 25px!important;min-height:0!important;overflow:visible!important}
+.ufma-column{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;min-width:0;padding-right:20px;border-right:1px solid var(--line)}
+.ufma-mark{width:110px;height:110px;object-fit:contain}
+.ufma-column h2{font-size:15px;line-height:1.25;margin:4px 0 7px;font-weight:800}
+.ufma-column p{font-size:11px;line-height:1.4;margin:0;color:var(--muted)}
+.neuro-column{display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;min-width:0;gap:5px}
+.neuro-column .eyebrow{font-size:11px;letter-spacing:2px}
+.neuro-mark{width:min(100%,420px);height:135px;object-fit:contain;display:block}
+.neuro-column h3{font-size:13px;line-height:1.4;font-weight:600;max-width:900px;margin:0 auto}
+.neuro-people{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;width:100%;padding-top:8px;margin-top:4px;border-top:1px solid var(--line)}
+.neuro-people .person span{font-size:10px;color:var(--muted);letter-spacing:1px}
+.neuro-people .person strong{font-size:12px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1250px){.neuro-header{grid-template-columns:minmax(230px,25%) minmax(0,1fr)!important;padding:16px 24px!important}.neuro-mark{height:120px}.ufma-mark{height:102px;width:102px}}
+@media(max-height:800px) and (min-width:901px){.neuro-header{padding:10px 18px!important;gap:16px!important}.neuro-mark{height:95px!important}.ufma-mark{height:85px;width:85px}.neuro-column h3{font-size:12px}.ufma-column h2{font-size:13px}}
+@media(max-width:700px){.neuro-header{grid-template-columns:1fr!important;gap:12px!important}.ufma-column{border-right:0;border-bottom:1px solid var(--line);padding:0 0 12px}.ufma-mark{height:70px;width:70px}.ufma-column h2{font-size:13px}.neuro-mark{height:110px}.neuro-people{gap:15px}.neuro-column h3{font-size:12px}}
 </style>
 </head>
 
@@ -641,66 +659,24 @@ body[data-theme="light"] .timeline-header,body[data-theme="light"] .group{backgr
 
 <!-- CABECALHO INSTITUCIONAL -->
 
-<header class="header">
-
-  <div class="brand-row">
-
-    <img
-      class="logo"
-      src="assets/ufma.png"
-      alt="Universidade Federal do Maranhão"
-    >
-
-    <div class="institution">
-      <h2>UNIVERSIDADE FEDERAL DO MARANHÃO</h2>
-
-      <p>
-        Programa de Pós-Graduação em Engenharia Elétrica<br>
-        Doutorado em Engenharia Elétrica<br>
-        Automação e Controle · Processamento da Informação Biológica
-      </p>
-    </div>
-
-    <img
-      class="logo"
-      src="assets/neurodyn.png"
-      alt="NeuroDyn"
-    >
-
+<header class="header neuro-header">
+  <div class="ufma-column">
+    <img class="ufma-mark" src="assets/ufma.png" alt="Brasão da Universidade Federal do Maranhão">
+    <h2>UNIVERSIDADE FEDERAL DO MARANHÃO</h2>
+    <p>Programa de Pós-Graduação em Engenharia Elétrica</p>
+    <p>Doutorado em Engenharia Elétrica</p>
+    <p>Automação e Controle · Processamento da Informação Biológica</p>
   </div>
-
-  <div class="project-title">
-
-    <div class="eyebrow">
-      PROJETO DE PESQUISA · DOUTORADO
+  <div class="neuro-column">
+    <div class="eyebrow">PROJETO DE PESQUISA · DOUTORADO</div>
+    <img class="neuro-mark" src="assets/neurodyn.png" alt="NeuroDyn">
+    <h1 class="visually-hidden">NeuroDyn</h1>
+    <h3>Identificação de Assinaturas Neurofisiológicas Transdiagnósticas por Meio de Estatísticas de Ordem Superior e Modelagem Dinâmica de Sinais EEG Pediátricos</h3>
+    <div class="neuro-people">
+      <div class="person"><span>ORIENTADOR</span><strong>Prof. Dr. Allan Kardec Duailibe Barros Filho</strong></div>
+      <div class="person"><span>PESQUISADORA</span><strong>M.Sc. Renata Costa Rocha</strong></div>
     </div>
-
-    <h1>NeuroDyn</h1>
-
-    <h3>
-      Identificação de Assinaturas Neurofisiológicas
-      Transdiagnósticas por Meio de Estatísticas de Ordem
-      Superior e Modelagem Dinâmica de Sinais EEG Pediátricos
-    </h3>
-
   </div>
-
-  <div class="people">
-
-    <div class="person">
-      <span>ORIENTADOR</span>
-      <strong>
-        Prof. Dr. Allan Kardec Duailibe Barros Filho
-      </strong>
-    </div>
-
-    <div class="person">
-      <span>PESQUISADORA</span>
-      <strong>M.Sc. Renata Costa Rocha</strong>
-    </div>
-
-  </div>
-
 </header>
 
 <div class="dashboard-layout">
