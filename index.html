@@ -499,6 +499,12 @@ footer {
     gap: 20px;
   }
 }
+
+/* NeuroDyn - painel de planejamento em tela unica (desktop) */
+.container{max-width:1800px;padding:12px 18px 10px}.header{padding:12px 24px;border-radius:16px}.brand-row{grid-template-columns:90px minmax(0,1fr)130px;gap:18px}.logo{max-height:72px}.institution h2{font-size:15px;margin:0 0 3px}.institution p{font-size:11px;line-height:1.3;margin:0}.project-title{margin-top:5px}.project-title h1{font-size:27px;margin:2px 0}.project-title h3{font-size:12px;line-height:1.35;margin:4px auto;max-width:1100px}.eyebrow{font-size:9px;letter-spacing:1.5px}.people{margin-top:8px;gap:25px}.person span{font-size:9px;margin-bottom:2px}.person strong{font-size:11px}.cards{gap:9px;margin:9px 0}.card{padding:9px 14px;border-radius:12px}.card span{font-size:10px}.card strong{font-size:19px;margin-top:3px}.card small{font-size:10px;margin-top:1px}.container>a[href="diario/"]{margin:0 0 7px!important;padding:6px 11px!important;font-size:12px!important}.panel{padding:11px 16px;margin:7px 0;border-radius:13px}.panel h2{font-size:17px;margin:0 0 4px}.description{font-size:11px;line-height:1.4;margin:3px 0}.legend{gap:10px;margin:7px 0;font-size:10px}.legend i{width:9px;height:9px}.scroller{max-height:none;min-height:0;flex:1;overscroll-behavior:contain}.timeline-header{padding:8px 0;font-size:10px}.group{margin-top:5px;padding:6px;font-size:10px}.gantt-row{min-height:31px}.task-name{font-size:10px;padding:4px 9px}.task-name small{font-size:9px;margin-top:0}.timeline{height:26px}.bar{height:17px}.milestone-line{height:28px}.milestone-banner{padding:6px 10px;margin-top:7px;border-radius:8px;font-size:10px}.milestone-banner p{margin:2px 0}.extra-panel{margin:6px 0;color:var(--muted);font-size:11px}.extra-panel>summary{cursor:pointer;list-style:none;display:inline-block;border-bottom:1px dotted #63819f}.extra-panel>summary:before{content:"＋ ";color:var(--cyan)}.extra-panel[open]>summary:before{content:"− "}.extra-panel>summary::-webkit-details-marker{display:none}.extra-panel .panel{margin-top:6px}.extra-panel .deliverable{padding:10px}.extra-panel .deliverable strong{font-size:17px}footer{font-size:9px;padding:4px;line-height:1.25}
+@media(min-width:1050px) and (min-height:650px){html,body{height:100%;overflow:hidden}.container{height:100dvh;display:flex;flex-direction:column;overflow:hidden}.header,.cards,.container>a[href="diario/"],.extra-panel,footer{flex-shrink:0}.container>.panel{flex:1;min-height:0;display:flex;flex-direction:column}.scroller{overflow:auto}.gantt{min-width:1050px}}
+@media(max-width:1049px), (max-height:649px){html,body{height:auto;overflow:auto}.container{display:block}.scroller{max-height:65vh;overflow:auto}.brand-row{grid-template-columns:75px 1fr 100px}.logo{max-height:66px}.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.container{padding:9px}.header{padding:11px}.brand-row{grid-template-columns:55px 1fr 65px;gap:5px}.institution h2{font-size:11px}.institution p{font-size:9px}.logo{max-height:48px}.project-title h3{font-size:11px}.cards{grid-template-columns:repeat(2,1fr)}.card{padding:8px}.card strong{font-size:16px}.people{gap:10px}.person strong{font-size:10px}}
 </style>
 </head>
 
@@ -700,7 +706,7 @@ footer {
 
 <!-- ENTREGAS -->
 
-<section class="panel">
+<details class="extra-panel"><summary>Entregas previstas · 2 artigos, software e tese</summary><section class="panel">
 
   <h2>Entregas previstas</h2>
 
@@ -741,7 +747,7 @@ footer {
 
   </div>
 
-</section>
+</section></details>
 
 <footer>
   NeuroDyn · Universidade Federal do Maranhão · PPGEE<br>
