@@ -501,20 +501,20 @@ footer {
 }
 
 
-/* Cabeçalho institucional proporcional ao Diário Científico; sem alterar Gantt */
-@media (min-width:901px){
-.header{padding:24px 30px;border-radius:20px}
-.brand-row{grid-template-columns:155px minmax(0,1fr)190px;gap:22px}
-.logo{max-height:115px}
-.institution h2{font-size:19px;margin:0 0 7px}
-.institution p{font-size:12px;line-height:1.55;margin:4px 0}
-.project-title{margin-top:17px}
-.project-title h1{font-size:39px;margin:5px 0}
-.project-title h3{font-size:16px;line-height:1.45;margin:10px auto;max-width:1080px}
-.eyebrow{font-size:11px;letter-spacing:1.8px}
-.people{margin-top:17px;gap:55px}
-.person span{margin-bottom:5px}
-.person strong{font-size:13px}
+/* Cabeçalho compacto, semelhante ao Diario Cientifico */
+@media(min-width:901px){
+.header{padding:15px 25px 14px;border-radius:18px;display:grid;grid-template-columns:1fr;gap:0}
+.brand-row{grid-template-columns:100px minmax(0,1fr)130px;gap:16px;align-items:center}
+.logo{max-height:78px;max-width:130px}
+.institution h2{font-size:16px;margin:0 0 3px}
+.institution p{font-size:11px;line-height:1.35;margin:2px 0}
+.project-title{margin-top:5px}
+.project-title h1{font-size:29px;margin:2px 0 3px;line-height:1.12}
+.project-title h3{font-size:13px;line-height:1.35;margin:4px auto;max-width:1050px}
+.eyebrow{font-size:9px;letter-spacing:1.5px}
+.people{margin-top:9px;gap:35px}
+.person span{font-size:9px;margin-bottom:2px}
+.person strong{font-size:11px}
 }
 </style>
 </head>
