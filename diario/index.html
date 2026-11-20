@@ -38,6 +38,32 @@ main{min-height:0;height:100dvh;box-sizing:border-box;overflow:visible}
 .top.hero{padding-top:10px;padding-bottom:9px}
 .hero-meta{margin-top:7px;padding-top:7px}
 }
+
+/* Ajuste final para telas desktop de 768-1080px: calendario completo e rodape visiveis */
+@media(min-width:1000px) and (min-height:700px){
+main{height:auto;min-height:0;padding:8px 14px 8px;display:block}
+.top.hero{padding:9px 18px 8px;top:4px}
+.brand-mark.brand-mark-official{width:105px;height:62px;flex-basis:105px}
+.brand-name{font-size:35px}
+.hero-meta{margin-top:7px;padding-top:7px}
+.panel{margin-top:8px;padding:9px 14px 8px}
+.panel:first-of-type{display:block;flex:none}
+.toolbar h2{font-size:19px}
+.week{margin:6px 0 5px}
+.calendar{display:grid;grid-auto-rows:auto;gap:5px;flex:none}
+.day{height:clamp(48px,6.7dvh,64px);min-height:0;padding:6px 8px}
+.day small{font-size:10px;line-height:1.1;margin-top:2px}
+.dot{margin-top:4px}
+.legend{margin-top:7px;padding-top:7px;gap:5px 13px;font-size:10px}
+.panel>.note{margin:5px 0 0}
+.about-disclosure{margin-top:5px}
+.footer{margin-top:4px}
+}
+@media(min-width:1000px) and (min-height:700px) and (max-height:820px){
+.day{height:clamp(43px,6.3dvh,53px)}
+.brand-mark.brand-mark-official{width:92px;height:55px;flex-basis:92px}
+.brand-name{font-size:31px}
+}
 </style></head><body><main>
 <header class="top hero"><div class="hero-head"><div class="brand"><div class="brand-mark brand-mark-official"><img src="../neurodyn.png" alt="Logotipo oficial NeuroDyn: cérebro com ondas de EEG e conexões neurais" width="240" height="150" loading="eager"></div><div><div class="eyebrow">PESQUISA DOUTORAL · UFMA</div><h1 class="brand-name">Neuro<span>Dyn</span></h1><p class="hero-subtitle">Diário Científico · Engenharia Elétrica</p></div></div><div class="hero-nav-group"><a class="hero-nav" href="../">← Voltar ao cronograma de Gantt</a><div class="today-status" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><span>Hoje é dia <strong id="todayDate">—</strong></span></div></div></div><div class="hero-meta"><div class="meta-item"><span class="meta-label">Pesquisadora</span><span class="meta-value">Renata Costa Rocha</span></div><div class="meta-item"><span class="meta-label">Programa</span><span class="meta-value">Doutorado em Engenharia Elétrica · UFMA</span></div><div class="meta-item"><span class="meta-label">Linha de pesquisa</span><span class="meta-value">Automação e Controle</span></div><div class="meta-item"><span class="meta-label">Marco fundador</span><span class="meta-value">18 de novembro de 2026</span></div></div></header>
 <section class="panel"><div class="toolbar"><button class="button" id="prev" aria-label="Mês anterior">←</button><h2 id="month"></h2><button class="button" id="next" aria-label="Próximo mês">→</button></div>
