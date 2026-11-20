@@ -6,10 +6,10 @@
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#080f1e,#0c1830);color:var(--text);font-family:"Segoe UI",Arial,sans-serif;min-height:100vh}
 main{max-width:1150px;margin:auto;padding:30px 18px}a{color:var(--cyan)}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.eyebrow{color:var(--cyan);font-size:12px;letter-spacing:2px;font-weight:700}h1{font-size:clamp(30px,5vw,48px);margin:10px 0}p{color:var(--muted);line-height:1.65}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.toolbar h2{margin:0;font-size:22px}.button{background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:10px 15px;border-radius:10px;cursor:pointer}.button:hover,.day:hover{border-color:var(--cyan)}.button:disabled{opacity:.3;cursor:not-allowed}.week,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.week{margin:22px 0 10px;color:var(--muted);font-size:12px;text-align:center}.day{min-height:86px;text-align:left;padding:10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);cursor:pointer;position:relative}.day.empty{background:transparent;border-color:transparent;cursor:default}.day.has{border-color:#7965ba}.dot{width:8px;height:8px;background:var(--purple);border-radius:50%;display:block;margin-top:12px}.day small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.legend{font-size:13px;color:var(--muted);margin-top:16px}.legend .dot{display:inline-block;margin:0 6px 0 0}.dialog{border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);width:min(620px,calc(100% - 24px));padding:28px;box-shadow:0 25px 90px #000a}.dialog::backdrop{background:#020711cf}.dialog h2{margin:10px 0}.close{float:right}.tag{color:var(--cyan);font-size:12px;letter-spacing:1px;text-transform:uppercase}.entry{border-top:1px solid var(--line);margin-top:16px;padding-top:12px;white-space:pre-line;line-height:1.6}.note{font-size:12px}.footer{margin-top:25px;font-size:12px;color:var(--muted)}@media(max-width:600px){.panel{padding:12px}.calendar,.week{gap:4px}.day{min-height:65px;padding:6px;font-size:13px}.day small{font-size:9px}.toolbar h2{font-size:17px}}
 </style></head><body><main>
-<div class="top"><div><div class="eyebrow">UFMA · DOUTORADO EM ENGENHARIA ELÉTRICA</div><h1>NeuroDyn <span style="color:var(--cyan)">| Diário Científico</span></h1><p>Histórico de pesquisa · atividades, marcos e decisões metodológicas</p></div><a href="../">← Voltar ao cronograma de Gantt</a></div>
+<div class="top"><div><div class="eyebrow">UFMA · DOUTORADO EM ENGENHARIA ELÉTRICA</div><h1>NeuroDyn <span style="color:var(--cyan)">| Diário Científico</span></h1><p>Da investigação inicial ao nascimento do NeuroDyn e à validação científica</p></div><a href="../">← Voltar ao cronograma de Gantt</a></div>
 <section class="panel"><div class="toolbar"><button class="button" id="prev" aria-label="Mês anterior">←</button><h2 id="month"></h2><button class="button" id="next" aria-label="Próximo mês">→</button></div>
 <div class="week"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div><div id="calendar" class="calendar"></div><div class="legend"><span class="dot"></span>Data com registro documentado · clique para abrir</div></section>
-<section class="panel"><h2>Sobre os registros</h2><p>O calendário começa em setembro de 2026. Os registros retrospectivos são resumos de marcos conhecidos, não transcrições de um diário escrito na própria data. Datas sem evidência confirmada permanecem vazias.</p><p class="note">Esta página é pública. Resultados científicos detalhados, dados sensíveis e anotações internas devem permanecer no repositório privado do NeuroDyn.</p></section>
+<section class="panel"><h2>Sobre os registros</h2><p><strong>Até 17/11:</strong> revisão da literatura, avaliação de bases e amadurecimento da proposta de doutorado. <strong>18/11:</strong> criação do NeuroDyn e início oficial do projeto. <strong>A partir de 19/11:</strong> execução e validação da pesquisa NeuroDyn. Os registros retrospectivos não são transcrições literais de diários escritos na própria data.</p><p class="note">Esta página é pública. Resultados científicos detalhados, dados sensíveis e anotações internas devem permanecer no repositório privado do NeuroDyn.</p></section>
 <dialog id="popup" class="dialog"><button class="button close" id="close" aria-label="Fechar">✕</button><div class="tag" id="date"></div><h2 id="title"></h2><div id="details" class="entry"></div><div id="sources" class="entry" hidden><strong>Fontes e rastreabilidade</strong><div id="sourceLinks"></div><p class="note">Os links são evidências e referências relacionadas ao tema; um commit posterior não comprova que a atividade ocorreu na data do diário.</p></div></dialog>
 <div class="footer">NeuroDyn · Universidade Federal do Maranhão · Pesquisa em desenvolvimento</div></main>
 <script>
@@ -18,8 +18,8 @@ const first=new Date(2026,8,1);
 const records={
   "2026-11-08": {
     "title": "Em busca de uma pergunta científica",
-    "type": "Investigação",
-    "details": "O QUE FIZ\nInvestiguei grandes questões da neurociência e possibilidades de estudar doenças psiquiátricas com EEG. Considerei depressão, TOC e transtornos relacionados ao uso de álcool e outras substâncias. Examinei as bases HBN, UCI Alcoholism EEG, ds005907 e COGA, além de um estudo com metanfetamina.\n\nO QUE OBSERVEI\nAs bases encontradas apresentavam limitações de tamanho amostral, acesso aos sinais individuais ou cobertura espacial. Não confirmei uma base que atendesse simultaneamente a todos os critérios.\n\nDECISÕES\nNão focar em previsão de recaídas. Priorizar uma pergunta médica relevante e dados brutos acessíveis; adotar, nesta busca, a meta de pelo menos 300 participantes com informações clínicas adequadas.\n\nHIPÓTESES EM ABERTO\nAlterações da dinâmica cerebral poderiam ajudar a compreender processos de decisão, recompensa e regulação do comportamento. Ainda não havia hipótese operacional nem base selecionada.\n\nREFLEXÃO\nPercebi que uma base grande não basta: ela precisa permitir responder a uma pergunta científica relevante.",
+    "type": "Revisão e fundamentação",
+    "details": "FASE ANTERIOR AO NEURODYN — FUNDAMENTAÇÃO DO DOUTORADO\n\nO QUE FIZ\nInvestiguei grandes questões da neurociência e possibilidades de estudar doenças psiquiátricas com EEG. Considerei depressão, TOC e transtornos relacionados ao uso de álcool e outras substâncias. Examinei as bases HBN, UCI Alcoholism EEG, ds005907 e COGA, além de um estudo com metanfetamina.\n\nO QUE OBSERVEI\nAs bases encontradas apresentavam limitações de tamanho amostral, acesso aos sinais individuais ou cobertura espacial. Não confirmei uma base que atendesse simultaneamente a todos os critérios.\n\nDECISÕES\nNão focar em previsão de recaídas. Priorizar uma pergunta médica relevante e dados brutos acessíveis; adotar, nesta busca, a meta de pelo menos 300 participantes com informações clínicas adequadas.\n\nHIPÓTESES EM ABERTO\nAlterações da dinâmica cerebral poderiam ajudar a compreender processos de decisão, recompensa e regulação do comportamento. Ainda não havia hipótese operacional nem base selecionada.\n\nREFLEXÃO\nPercebi que uma base grande não basta: ela precisa permitir responder a uma pergunta científica relevante.\n\nCONTEXTO HISTÓRICO\nEste registro documenta a investigação e o amadurecimento da tese antes da criação do NeuroDyn em 18/11/2026. As ideias e os experimentos dessa fase não devem ser apresentados como atividades já executadas dentro do NeuroDyn.",
     "links": [
       {
         "title": "Repositório da pesquisa com UCI",
@@ -35,8 +35,8 @@ const records={
   },
   "2026-11-09": {
     "title": "Auditoria da base UCI EEG",
-    "type": "Marco experimental",
-    "details": "O QUE FIZ\nAvancei na auditoria da UCI EEG Alcoholism Database, avaliando integridade dos ensaios, condições experimentais e problemas de canais.\n\nO QUE OBSERVEI\nA base tem 122 participantes e registros de 64 canais. A auditoria identificou problemas estruturais e canais constantes em parte dos ensaios, exigindo critérios explícitos de qualidade.\n\nDECISÕES\nManter rastreabilidade dos arquivos e tratar qualidade dos sinais antes de qualquer avaliação preditiva.\n\nHIPÓTESES EM ABERTO\nAinda era necessário demonstrar que a base sustentaria uma contribuição matemática além da classificação de grupos.",
+    "type": "Pesquisa exploratória",
+    "details": "FASE ANTERIOR AO NEURODYN — FUNDAMENTAÇÃO DO DOUTORADO\n\nO QUE FIZ\nAvancei na auditoria da UCI EEG Alcoholism Database, avaliando integridade dos ensaios, condições experimentais e problemas de canais.\n\nO QUE OBSERVEI\nA base tem 122 participantes e registros de 64 canais. A auditoria identificou problemas estruturais e canais constantes em parte dos ensaios, exigindo critérios explícitos de qualidade.\n\nDECISÕES\nManter rastreabilidade dos arquivos e tratar qualidade dos sinais antes de qualquer avaliação preditiva.\n\nHIPÓTESES EM ABERTO\nAinda era necessário demonstrar que a base sustentaria uma contribuição matemática além da classificação de grupos.\n\nCONTEXTO HISTÓRICO\nEste registro documenta a investigação e o amadurecimento da tese antes da criação do NeuroDyn em 18/11/2026. As ideias e os experimentos dessa fase não devem ser apresentados como atividades já executadas dentro do NeuroDyn.",
     "links": [
       {
         "title": "Auditoria estrutural UCI — commit",
@@ -52,8 +52,8 @@ const records={
   },
   "2026-11-11": {
     "title": "Revisão de literatura e identificação dinâmica",
-    "type": "Literatura",
-    "details": "O QUE FIZ\nLi um artigo de 2024 da Scientific Reports que utiliza a base UCI Alcoholism EEG e combina seleção de características, LSTM e redes neurais. Procurei entender a proposta de CNNs e LSTMs multiestágio.\n\nO QUE OBSERVEI\nO artigo relata acurácia de 99,59%. Isso reforçou minha preocupação de que buscar apenas mais acurácia não seria suficiente para sustentar a originalidade da tese. O valor é um resultado relatado pelos autores, não uma validação independente minha.\n\nDECISÕES\nExplorar propriedades dinâmicas do EEG — estabilidade, memória e resposta a estímulos — em vez de depender exclusivamente de classificadores.\n\nHIPÓTESES EM ABERTO\nA identificação de sistemas poderia revelar propriedades relevantes, mas a lacuna científica e a viabilidade ainda precisavam ser verificadas.\n\nREFERÊNCIA\nManivannan et al., Scientific Reports (2024), DOI: 10.1038/s41598-024-72926-7.",
+    "type": "Revisão e fundamentação",
+    "details": "FASE ANTERIOR AO NEURODYN — FUNDAMENTAÇÃO DO DOUTORADO\n\nO QUE FIZ\nLi um artigo de 2024 da Scientific Reports que utiliza a base UCI Alcoholism EEG e combina seleção de características, LSTM e redes neurais. Procurei entender a proposta de CNNs e LSTMs multiestágio.\n\nO QUE OBSERVEI\nO artigo relata acurácia de 99,59%. Isso reforçou minha preocupação de que buscar apenas mais acurácia não seria suficiente para sustentar a originalidade da tese. O valor é um resultado relatado pelos autores, não uma validação independente minha.\n\nDECISÕES\nExplorar propriedades dinâmicas do EEG — estabilidade, memória e resposta a estímulos — em vez de depender exclusivamente de classificadores.\n\nHIPÓTESES EM ABERTO\nA identificação de sistemas poderia revelar propriedades relevantes, mas a lacuna científica e a viabilidade ainda precisavam ser verificadas.\n\nREFERÊNCIA\nManivannan et al., Scientific Reports (2024), DOI: 10.1038/s41598-024-72926-7.\n\nCONTEXTO HISTÓRICO\nEste registro documenta a investigação e o amadurecimento da tese antes da criação do NeuroDyn em 18/11/2026. As ideias e os experimentos dessa fase não devem ser apresentados como atividades já executadas dentro do NeuroDyn.",
     "links": [
       {
         "title": "Artigo Scientific Reports (DOI)",
@@ -69,8 +69,8 @@ const records={
   },
   "2026-11-12": {
     "title": "Concepção inicial da HSD-Net",
-    "type": "Decisão metodológica",
-    "details": "O QUE FIZ\nReavaliei experimentos anteriores sem resultados conclusivos para uma assinatura ligada ao alcoolismo. Estudei EEGNet, EEG Conformer, Transformers, redes em grafos, S4/Mamba e Neural ODE. Discuti propostas preliminares, como CREDO-EEG, e a técnica estatística do professor Jonathan.\n\nO QUE OBSERVEI\nCombinar técnicas existentes não garante originalidade. A técnica do Jonathan, originalmente aplicada a sinais cardíacos, poderia inspirar descritores estatísticos para EEG, mas sua utilidade adicional precisava ser demonstrada.\n\nDECISÕES\nConcebi, apenas no plano teórico, a HSD-Net: um ramo estatístico inspirado na abordagem do Jonathan e um ramo dinâmico baseado em EEGNet. Planejei comparar EEGNet isolado, estatísticas isoladas, fusão simples e um mecanismo novo, respeitando separação por participante.\n\nHIPÓTESES EM ABERTO\nUma integração estatístico-dinâmica poderia produzir representações mais estáveis e complementares. Não implementei nem validei a HSD-Net neste dia.\n\nREFLEXÃO\nA originalidade terá de estar em um mecanismo matemático justificável e em sua validação, não apenas no nome de uma arquitetura.",
+    "type": "Exploração metodológica",
+    "details": "FASE ANTERIOR AO NEURODYN — FUNDAMENTAÇÃO DO DOUTORADO\n\nO QUE FIZ\nReavaliei experimentos anteriores sem resultados conclusivos para uma assinatura ligada ao alcoolismo. Estudei EEGNet, EEG Conformer, Transformers, redes em grafos, S4/Mamba e Neural ODE. Discuti propostas preliminares, como CREDO-EEG, e a técnica estatística do professor Jonathan.\n\nO QUE OBSERVEI\nCombinar técnicas existentes não garante originalidade. A técnica do Jonathan, originalmente aplicada a sinais cardíacos, poderia inspirar descritores estatísticos para EEG, mas sua utilidade adicional precisava ser demonstrada.\n\nDECISÕES\nConcebi, apenas no plano teórico, a HSD-Net: um ramo estatístico inspirado na abordagem do Jonathan e um ramo dinâmico baseado em EEGNet. Planejei comparar EEGNet isolado, estatísticas isoladas, fusão simples e um mecanismo novo, respeitando separação por participante.\n\nHIPÓTESES EM ABERTO\nUma integração estatístico-dinâmica poderia produzir representações mais estáveis e complementares. Não implementei nem validei a HSD-Net neste dia.\n\nREFLEXÃO\nA originalidade terá de estar em um mecanismo matemático justificável e em sua validação, não apenas no nome de uma arquitetura.\n\nCONTEXTO HISTÓRICO\nEste registro documenta a investigação e o amadurecimento da tese antes da criação do NeuroDyn em 18/11/2026. As ideias e os experimentos dessa fase não devem ser apresentados como atividades já executadas dentro do NeuroDyn.",
     "links": [
       {
         "title": "Repositório experimental UCI",
@@ -84,10 +84,49 @@ const records={
       }
     ]
   },
+  "2026-11-17": {
+    "title": "Retomada da proposta original e investigação do método",
+    "type": "Fundamentação",
+    "details": "FASE ANTERIOR AO NEURODYN — FUNDAMENTAÇÃO DO DOUTORADO\n\nO QUE FIZ\nRetomei a proposta de doutorado apresentada à UFMA e examinei possibilidades de manter o foco em transtornos psiquiátricos pediátricos, utilizando EEG da HBN. Discuti assinaturas transdiagnósticas, identificação de sistemas e a possível adaptação da abordagem estatística do professor Jonathan, originalmente desenvolvida para ECG.\n\nO QUE OBSERVEI\nA ausência de ECG pareado utilizável na base EEG escolhida exigia revisar a implementação multimodal inicial. A utilização de momentos estatísticos no EEG, isoladamente, não constitui inovação comprovada.\n\nDECISÕES\nManter a pergunta neuropsiquiátrica da proposta original. Investigar primeiro se a técnica estatística oferece informação complementar e reprodutível, antes de investir em uma plataforma de software ou em classificadores clínicos.\n\nHIPÓTESES EM ABERTO\nA evolução temporal de estatísticas de ordem superior poderia oferecer uma representação útil para identificação de dinâmicas cerebrais e, futuramente, associações com dimensões de sintomas.\n\nREFLEXÃO\nQuero uma contribuição matemática demonstrável, conectada à pergunta médica, e não apenas uma arquitetura mais complexa.\n\nNOTA DE PROVENIÊNCIA\nRegistro retrospectivo atribuído a 17/11 por confirmação da pesquisadora. O texto-base também fundamenta a consolidação registrada em 20/11.\n\nCONTEXTO HISTÓRICO\nEste registro documenta a investigação e o amadurecimento da tese antes da criação do NeuroDyn em 18/11/2026. As ideias e os experimentos dessa fase não devem ser apresentados como atividades já executadas dentro do NeuroDyn.",
+    "links": [
+      {
+        "title": "README científico NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/README.md",
+        "note": "Documentação consolidada posteriormente"
+      },
+      {
+        "title": "Histórico do NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commits",
+        "note": "Evolução posterior da metodologia"
+      }
+    ]
+  },
+  "2026-11-18": {
+    "title": "Criação do NeuroDyn — início oficial do projeto",
+    "type": "Marco fundador",
+    "details": "O QUE FIZ\nCriei o NeuroDyn e iniciei formalmente a organização de sua linha própria de investigação matemática e computacional. O trabalho exploratório anterior passou a servir como fundamentação para uma pesquisa estruturada, com repositório, experimentos e documentação científica.\n\nCONTEXTO\nNos dias anteriores, aprofundei a literatura, comparei abordagens de classificação e identificação de sistemas, avaliei bases de EEG e amadureci o propósito da tese. Esse período foi de preparação científica, não de execução do NeuroDyn como projeto já constituído.\n\nDECISÕES\nEstabelecer o NeuroDyn como projeto central de investigação das estatísticas de ordem superior e propriedades dinâmicas do EEG, com validação matemática anterior a alegações clínicas ou desenvolvimento de produto.\n\nHIPÓTESES EM ABERTO\nEstatísticas de ordem superior das variações temporais poderiam revelar informação complementar às representações convencionais do EEG. Sua robustez, reprodutibilidade, interpretação e originalidade ainda precisavam ser demonstradas.\n\nREFLEXÃO\nEste é o marco de nascimento do NeuroDyn. Os estudos anteriores explicam como cheguei até aqui; a partir de agora, a pesquisa tem identidade, organização e trajetória experimental próprias.\n\nNOTA CRONOLÓGICA\nA data de criação do projeto foi confirmada pela pesquisadora. Os commits relacionados são evidências da evolução do repositório e não devem ser interpretados automaticamente como publicados neste dia.",
+    "links": [
+      {
+        "title": "Repositório NeuroDyn",
+        "url": "https://github.com/ahcorataner/NeuroDyn",
+        "note": "Projeto criado nesta data, conforme confirmação da pesquisadora"
+      },
+      {
+        "title": "Commit de estrutura inicial",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commit/00ed2a7f0a56bfc48f8a10591e62cef7018318c7",
+        "note": "Evidência da estrutura inicial; consultar a data do commit no GitHub"
+      },
+      {
+        "title": "Histórico de commits",
+        "url": "https://github.com/ahcorataner/NeuroDyn/commits",
+        "note": "Evolução versionada do projeto"
+      }
+    ]
+  },
   "2026-11-19": {
     "title": "Balanço dos experimentos NeuroDyn",
     "type": "Resultados",
-    "details": "O QUE FIZ\nConsolidei os experimentos sintéticos E15–E19 e a aplicação inicial em EEG real da HBN. Analisei as estatísticas A3 e A6 como candidatas à caracterização de assimetria temporal.\n\nO QUE OBSERVEI\nNo experimento sintético E19.2, as taxas de detecção foram 6% (controle gaussiano), 2% (quadrático), 5% (exponencial) e 100% nos dois cenários de shot noise, sob as condições simuladas. A leitura dos 20 arquivos EEG foi bem-sucedida; a seleção inicial pelo canal E1 excluiu dois participantes por constância do canal. Esses são resultados de etapas específicas, não evidência de utilidade clínica.\n\nDECISÕES\nNão repetir auditorias desnecessariamente, não forçar resultados positivos e não antecipar classificação de transtornos. Priorizar qualidade dos canais, controles estatísticos, reprodutibilidade e comparação com métodos convencionais.\n\nHIPÓTESES EM ABERTO\nA3/A6 poderiam identificar propriedades temporais complementares no EEG real. Ainda faltava demonstrar que os efeitos não decorriam de artefatos e que eram reproduzíveis.\n\nREFLEXÃO\nJá havia uma prova de conceito sintética, mas não uma assinatura neurofisiológica validada.",
+    "details": "FASE NEURODYN — PESQUISA E VALIDAÇÃO\n\nO QUE FIZ\nConsolidei os experimentos sintéticos E15–E19 e a aplicação inicial em EEG real da HBN. Analisei as estatísticas A3 e A6 como candidatas à caracterização de assimetria temporal.\n\nO QUE OBSERVEI\nNo experimento sintético E19.2, as taxas de detecção foram 6% (controle gaussiano), 2% (quadrático), 5% (exponencial) e 100% nos dois cenários de shot noise, sob as condições simuladas. A leitura dos 20 arquivos EEG foi bem-sucedida; a seleção inicial pelo canal E1 excluiu dois participantes por constância do canal. Esses são resultados de etapas específicas, não evidência de utilidade clínica.\n\nDECISÕES\nNão repetir auditorias desnecessariamente, não forçar resultados positivos e não antecipar classificação de transtornos. Priorizar qualidade dos canais, controles estatísticos, reprodutibilidade e comparação com métodos convencionais.\n\nHIPÓTESES EM ABERTO\nA3/A6 poderiam identificar propriedades temporais complementares no EEG real. Ainda faltava demonstrar que os efeitos não decorriam de artefatos e que eram reproduzíveis.\n\nREFLEXÃO\nJá havia uma prova de conceito sintética, mas não uma assinatura neurofisiológica validada.",
     "links": [
       {
         "title": "E20.1 — auditoria EEG",
@@ -114,7 +153,7 @@ const records={
   "2026-11-20": {
     "title": "Retorno à proposta e foco matemático",
     "type": "Consolidação",
-    "details": "O QUE FIZ\nRetomei a proposta oficial de doutorado e discuti como preservar a pergunta sobre transtornos psiquiátricos pediátricos, agora com a HBN como base principal de EEG. Reexaminei a técnica do professor Jonathan, originalmente desenvolvida para ECG, e a possibilidade de adaptá-la a estatísticas temporais multicanais. Organizei a apresentação da pesquisa e o planejamento científico.\n\nO QUE OBSERVEI\nA base EEG escolhida não oferecia ECG pareado utilizável para a implementação multimodal inicial. Os resultados sintéticos são promissores em cenários controlados, mas os testes em EEG real ainda não demonstraram ganho consistente frente a descritores convencionais. A originalidade do método continua por demonstrar.\n\nDECISÕES\nPriorizar a formulação e a validação matemática antes de desenvolver o software ou investigar associações clínicas. Manter como objetivos futuros um artigo metodológico, um artigo de aplicação neurofisiológica e um software científico reprodutível.\n\nHIPÓTESES EM ABERTO\nEstatísticas de ordem superior das variações temporais do EEG poderiam ser robustas, reproduzíveis e complementares a métodos espectrais; sua evolução temporal poderia, se justificado, alimentar modelos de identificação de sistemas.\n\nPRÓXIMOS PASSOS\nDiscutir a direção com o orientador, distinguir a técnica original do Jonathan das extensões propostas e estabelecer critérios quantitativos de validação.\n\nREFLEXÃO\nQuero que o software seja consequência de uma contribuição científica demonstrada, e não seu ponto de partida.",
+    "details": "FASE NEURODYN — CONSOLIDAÇÃO METODOLÓGICA\n\nO QUE FIZ\nRetomei a proposta oficial de doutorado e discuti como preservar a pergunta sobre transtornos psiquiátricos pediátricos, agora com a HBN como base principal de EEG. Reexaminei a técnica do professor Jonathan, originalmente desenvolvida para ECG, e a possibilidade de adaptá-la a estatísticas temporais multicanais. Organizei a apresentação da pesquisa e o planejamento científico.\n\nO QUE OBSERVEI\nA base EEG escolhida não oferecia ECG pareado utilizável para a implementação multimodal inicial. Os resultados sintéticos são promissores em cenários controlados, mas os testes em EEG real ainda não demonstraram ganho consistente frente a descritores convencionais. A originalidade do método continua por demonstrar.\n\nDECISÕES\nPriorizar a formulação e a validação matemática antes de desenvolver o software ou investigar associações clínicas. Manter como objetivos futuros um artigo metodológico, um artigo de aplicação neurofisiológica e um software científico reprodutível.\n\nHIPÓTESES EM ABERTO\nEstatísticas de ordem superior das variações temporais do EEG poderiam ser robustas, reproduzíveis e complementares a métodos espectrais; sua evolução temporal poderia, se justificado, alimentar modelos de identificação de sistemas.\n\nPRÓXIMOS PASSOS\nDiscutir a direção com o orientador, distinguir a técnica original do Jonathan das extensões propostas e estabelecer critérios quantitativos de validação.\n\nREFLEXÃO\nQuero que o software seja consequência de uma contribuição científica demonstrada, e não seu ponto de partida.",
     "links": [
       {
         "title": "README científico NeuroDyn",
@@ -135,23 +174,6 @@ const records={
         "title": "Cronograma científico",
         "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/docs/cronograma_doutorado.md",
         "note": "Planejamento acadêmico"
-      }
-    ]
-  },
-  "2026-11-17": {
-    "title": "Retomada da proposta original e investigação do método",
-    "type": "Reflexão metodológica",
-    "details": "O QUE FIZ\nRetomei a proposta de doutorado apresentada à UFMA e examinei possibilidades de manter o foco em transtornos psiquiátricos pediátricos, utilizando EEG da HBN. Discuti assinaturas transdiagnósticas, identificação de sistemas e a possível adaptação da abordagem estatística do professor Jonathan, originalmente desenvolvida para ECG.\n\nO QUE OBSERVEI\nA ausência de ECG pareado utilizável na base EEG escolhida exigia revisar a implementação multimodal inicial. A utilização de momentos estatísticos no EEG, isoladamente, não constitui inovação comprovada.\n\nDECISÕES\nManter a pergunta neuropsiquiátrica da proposta original. Investigar primeiro se a técnica estatística oferece informação complementar e reprodutível, antes de investir em uma plataforma de software ou em classificadores clínicos.\n\nHIPÓTESES EM ABERTO\nA evolução temporal de estatísticas de ordem superior poderia oferecer uma representação útil para identificação de dinâmicas cerebrais e, futuramente, associações com dimensões de sintomas.\n\nREFLEXÃO\nQuero uma contribuição matemática demonstrável, conectada à pergunta médica, e não apenas uma arquitetura mais complexa.\n\nNOTA DE PROVENIÊNCIA\nRegistro retrospectivo atribuído a 17/11 por confirmação da pesquisadora. O texto-base também fundamenta a consolidação registrada em 20/11.",
-    "links": [
-      {
-        "title": "README científico NeuroDyn",
-        "url": "https://github.com/ahcorataner/NeuroDyn/blob/main/README.md",
-        "note": "Documentação consolidada posteriormente"
-      },
-      {
-        "title": "Histórico do NeuroDyn",
-        "url": "https://github.com/ahcorataner/NeuroDyn/commits",
-        "note": "Evolução posterior da metodologia"
       }
     ]
   }
