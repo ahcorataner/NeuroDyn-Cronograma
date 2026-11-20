@@ -1,0 +1,969 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>NeuroDyn | Planejamento do Doutorado</title>
+
+<style>
+:root {
+  --bg: #080f1e;
+  --panel: #101d32;
+  --panel2: #15243b;
+  --line: #293c57;
+  --text: #eef4ff;
+  --muted: #a2b3cc;
+  --blue: #568fff;
+  --cyan: #42c8e8;
+  --teal: #35c5b1;
+  --purple: #a98aff;
+  --gold: #f4bf65;
+  --green: #43d59b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(150deg, #080f1e, #0c1830);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.container {
+  max-width: 1500px;
+  margin: auto;
+  padding: 28px;
+}
+
+/* ================================
+   CABECALHO INSTITUCIONAL
+================================ */
+
+.header {
+  background: linear-gradient(135deg, #142744, #101a2e);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.brand-row {
+  display: grid;
+  grid-template-columns: 190px 1fr 230px;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo {
+  width: 100%;
+  max-height: 145px;
+  object-fit: contain;
+}
+
+.institution {
+  text-align: center;
+}
+
+.institution h2 {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.institution p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.project-title {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.project-title h1 {
+  font-size: 44px;
+  margin: 8px 0;
+}
+
+.project-title h3 {
+  max-width: 1000px;
+  margin: 15px auto;
+  font-size: 19px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.people {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.person {
+  text-align: center;
+}
+
+.person span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.person strong {
+  font-size: 14px;
+}
+
+/* ================================
+   INDICADORES
+================================ */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 25px 0;
+}
+
+.card,
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.card {
+  padding: 22px;
+}
+
+.card span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.card strong {
+  display: block;
+  font-size: 27px;
+  margin-top: 9px;
+}
+
+.card small {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.panel {
+  padding: 25px;
+  margin: 25px 0;
+}
+
+.panel h2 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ================================
+   LEGENDA
+================================ */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin: 25px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.legend i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+/* ================================
+   GANTT COM CABECALHO CONGELADO
+================================ */
+
+.scroller {
+  overflow: auto;
+  max-height: 650px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  scrollbar-color: #476487 #101d32;
+  scrollbar-width: thin;
+}
+
+.gantt {
+  min-width: 1150px;
+}
+
+.timeline-header,
+.gantt-row {
+  display: grid;
+  grid-template-columns: 270px repeat(8, minmax(105px, 1fr));
+}
+
+/* Barra dos semestres congelada */
+.timeline-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: #15243b;
+  border-bottom: 2px solid var(--cyan);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .45);
+
+  text-align: center;
+  color: #dceaff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 17px 0;
+}
+
+.timeline-header div:first-child {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.timeline-header div {
+  white-space: nowrap;
+}
+
+/* Separacao visual dos grupos */
+.group {
+  background: var(--panel2);
+  border-left: 3px solid var(--blue);
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.gantt-row {
+  min-height: 48px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.gantt-row:hover {
+  background: rgba(86,143,255,.07);
+}
+
+.task-name {
+  padding: 8px 14px 8px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.task-name small {
+  display: block;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* Area temporal com oito semestres */
+.timeline {
+  grid-column: 2 / 10;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  height: 34px;
+  align-items: center;
+  position: relative;
+
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(12.5% - 1px),
+    var(--line) calc(12.5% - 1px),
+    var(--line) 12.5%
+  );
+}
+
+/* 2029: periodo de contingencia */
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 75%;
+  width: 25%;
+  height: 100%;
+  background: rgba(255,255,255,.035);
+  pointer-events: none;
+}
+
+.bar {
+  height: 24px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+
+.bar:hover {
+  filter: brightness(1.2);
+}
+
+.done {
+  background: var(--green);
+}
+
+.method {
+  background: var(--blue);
+}
+
+.neuro {
+  background: var(--teal);
+}
+
+.paper {
+  background: var(--purple);
+}
+
+.product {
+  background: var(--gold);
+}
+
+.thesis {
+  background: var(--cyan);
+}
+
+/* ================================
+   MARCO DA DEFESA
+================================ */
+
+.milestone-row {
+  background: rgba(67,213,155,.06);
+}
+
+.milestone-row .task-name {
+  font-weight: 700;
+  color: var(--green);
+}
+
+.milestone-line {
+  grid-column: 2 / 10;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-items: center;
+  height: 42px;
+  position: relative;
+}
+
+.diamond {
+  grid-column: 6;
+  justify-self: center;
+  width: 17px;
+  height: 17px;
+  background: var(--green);
+  transform: rotate(45deg);
+  border: 3px solid #d4fff0;
+  box-shadow: 0 0 15px rgba(67,213,155,.6);
+}
+
+.milestone-banner {
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 24px;
+  background: rgba(67,213,155,.07);
+}
+
+.milestone-banner strong {
+  color: var(--green);
+}
+
+/* ================================
+   ENTREGAS CIENTIFICAS
+================================ */
+
+.deliverables {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.deliverable {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.deliverable strong {
+  display: block;
+  font-size: 24px;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.deliverable span {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 20px;
+  line-height: 1.8;
+}
+
+/* ================================
+   RESPONSIVIDADE
+================================ */
+
+@media (max-width: 900px) {
+  .brand-row {
+    grid-template-columns: 100px 1fr 120px;
+    gap: 10px;
+  }
+
+  .institution h2 {
+    font-size: 14px;
+  }
+
+  .cards,
+  .deliverables {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-title h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 16px;
+  }
+
+  .brand-row {
+    grid-template-columns: 65px 1fr 75px;
+  }
+
+  .institution h2 {
+    font-size: 11px;
+  }
+
+  .institution p {
+    font-size: 9px;
+  }
+
+  .project-title h3 {
+    font-size: 15px;
+  }
+
+  .cards,
+  .deliverables {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card strong {
+    font-size: 20px;
+  }
+
+  .people {
+    gap: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- CABECALHO INSTITUCIONAL -->
+
+<header class="header">
+
+  <div class="brand-row">
+
+    <img
+      class="logo"
+      src="assets/ufma.png"
+      alt="Universidade Federal do Maranhão"
+    >
+
+    <div class="institution">
+      <h2>UNIVERSIDADE FEDERAL DO MARANHÃO</h2>
+
+      <p>
+        Programa de Pós-Graduação em Engenharia Elétrica<br>
+        Doutorado em Engenharia Elétrica<br>
+        Automação e Controle · Processamento da Informação Biológica
+      </p>
+    </div>
+
+    <img
+      class="logo"
+      src="assets/neurodyn.png"
+      alt="NeuroDyn"
+    >
+
+  </div>
+
+  <div class="project-title">
+
+    <div class="eyebrow">
+      PROJETO DE PESQUISA · DOUTORADO
+    </div>
+
+    <h1>NeuroDyn</h1>
+
+    <h3>
+      Identificação de Assinaturas Neurofisiológicas
+      Transdiagnósticas por Meio de Estatísticas de Ordem
+      Superior e Modelagem Dinâmica de Sinais EEG Pediátricos
+    </h3>
+
+  </div>
+
+  <div class="people">
+
+    <div class="person">
+      <span>ORIENTADOR</span>
+      <strong>
+        Prof. Dr. Allan Kardec Duailibe Barros Filho
+      </strong>
+    </div>
+
+    <div class="person">
+      <span>PESQUISADORA</span>
+      <strong>M.Sc. Renata Costa Rocha</strong>
+    </div>
+
+  </div>
+
+</header>
+
+<!-- INDICADORES -->
+
+<section class="cards">
+
+  <div class="card">
+    <span>INGRESSO NO DOUTORADO</span>
+    <strong>2026.1</strong>
+    <small>Primeiro semestre de 2026</small>
+  </div>
+
+  <div class="card">
+    <span>META DE DEFESA</span>
+    <strong style="color:var(--green)">
+      15/12/2028
+    </strong>
+    <small>Conclusão antecipada · 3 anos</small>
+  </div>
+
+  <div class="card">
+    <span>PRAZO REGULAR PREVISTO</span>
+    <strong>2029.2</strong>
+    <small>Quatro anos de doutorado</small>
+  </div>
+
+  <div class="card">
+    <span>ENTREGAS CIENTÍFICAS</span>
+    <strong>2 artigos + tese</strong>
+    <small>Com protótipo tecnológico</small>
+  </div>
+
+</section>
+
+<!-- GRAFICO DE GANTT -->
+
+<section class="panel">
+
+  <h2>Cronograma de execução científica</h2>
+
+  <p class="description">
+    Planejamento semestral do NeuroDyn, estruturado em
+    metodologia matemática, validação neurofisiológica,
+    produção científica, desenvolvimento tecnológico
+    e conclusão da tese.
+  </p>
+
+  <div class="legend">
+
+    <span>
+      <i style="background:var(--green)"></i>
+      Concluído
+    </span>
+
+    <span>
+      <i style="background:var(--blue)"></i>
+      Metodologia
+    </span>
+
+    <span>
+      <i style="background:var(--teal)"></i>
+      Neurociência
+    </span>
+
+    <span>
+      <i style="background:var(--purple)"></i>
+      Publicações
+    </span>
+
+    <span>
+      <i style="background:var(--gold)"></i>
+      Produto
+    </span>
+
+    <span>
+      <i style="background:var(--cyan)"></i>
+      Tese
+    </span>
+
+  </div>
+
+  <!-- Area com rolagem e cabecalho fixo -->
+
+  <div class="scroller" id="gantt-scroll">
+
+    <div class="gantt">
+
+      <div class="timeline-header">
+
+        <div>ETAPAS E ATIVIDADES</div>
+
+        <div>2026.1</div>
+        <div>2026.2</div>
+
+        <div>2027.1</div>
+        <div>2027.2</div>
+
+        <div>2028.1</div>
+        <div>2028.2</div>
+
+        <div>2029.1</div>
+        <div>2029.2</div>
+
+      </div>
+
+      <div id="gantt-content"></div>
+
+    </div>
+
+  </div>
+
+  <div class="milestone-banner">
+
+    <strong>
+      ◆ DEFESA ANTECIPADA DA TESE —
+      15 DE DEZEMBRO DE 2028
+    </strong>
+
+    <p class="description">
+      Data-alvo provisória para conclusão do doutorado,
+      condicionada à aprovação acadêmica, aos resultados
+      científicos e ao cumprimento dos requisitos
+      do PPGEE/UFMA.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- ENTREGAS -->
+
+<section class="panel">
+
+  <h2>Entregas previstas</h2>
+
+  <p class="description">
+    Resultados científicos e tecnológicos planejados
+    para o projeto.
+  </p>
+
+  <div class="deliverables">
+
+    <div class="deliverable">
+      <strong>01</strong>
+      <span>
+        Artigo científico — metodologia matemática
+      </span>
+    </div>
+
+    <div class="deliverable">
+      <strong>02</strong>
+      <span>
+        Artigo científico — validação neurofisiológica
+      </span>
+    </div>
+
+    <div class="deliverable">
+      <strong>03</strong>
+      <span>
+        Software NeuroDyn e documentação para INPI
+      </span>
+    </div>
+
+    <div class="deliverable">
+      <strong>04</strong>
+      <span>
+        Tese de doutorado e defesa
+      </span>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  NeuroDyn · Universidade Federal do Maranhão · PPGEE<br>
+  Planejamento acadêmico preliminar —
+  ingresso 2026.1 · Meta de defesa 2028.2
+</footer>
+
+</div>
+
+<script>
+
+/* ===================================
+   ATIVIDADES DO DOUTORADO
+=================================== */
+
+const groups = [
+
+  {
+    title:
+      "01 · FUNDAMENTAÇÃO E DESENVOLVIMENTO MATEMÁTICO",
+
+    tasks: [
+      [
+        "Auditoria HBN-EEG e experimentos E01–E20",
+        "Base experimental",
+        1, 2, "done"
+      ],
+      [
+        "Formulação da metodologia matemática",
+        "Contribuição central",
+        2, 4, "method"
+      ],
+      [
+        "Validação matemática e robustez",
+        "Testes e controles",
+        3, 4, "method"
+      ]
+    ]
+  },
+
+  {
+    title:
+      "02 · VALIDAÇÃO NEUROFISIOLÓGICA",
+
+    tasks: [
+      [
+        "Ampliação da amostra HBN-EEG",
+        "Dados pediátricos",
+        3, 5, "neuro"
+      ],
+      [
+        "Modelagem dinâmica de EEG",
+        "Análise de sistemas",
+        4, 5, "neuro"
+      ],
+      [
+        "Validação transdiagnóstica",
+        "Investigação clínica",
+        5, 6, "neuro"
+      ]
+    ]
+  },
+
+  {
+    title:
+      "03 · PUBLICAÇÕES CIENTÍFICAS",
+
+    tasks: [
+      [
+        "Artigo 1 — metodologia matemática",
+        "Redação e submissão",
+        3, 4, "paper"
+      ],
+      [
+        "Artigo 2 — aplicação neurofisiológica",
+        "Redação e submissão",
+        5, 6, "paper"
+      ]
+    ]
+  },
+
+  {
+    title:
+      "04 · DESENVOLVIMENTO TECNOLÓGICO",
+
+    tasks: [
+      [
+        "Protótipo computacional NeuroDyn",
+        "Implementação e testes",
+        4, 6, "product"
+      ],
+      [
+        "Documentação e preparação INPI",
+        "Registro pretendido",
+        5, 6, "product"
+      ]
+    ]
+  },
+
+  {
+    title:
+      "05 · CONCLUSÃO ACADÊMICA",
+
+    tasks: [
+      [
+        "Qualificação e redação da tese",
+        "Conforme calendário PPGEE",
+        4, 6, "thesis"
+      ],
+      [
+        "Revisão final e preparação da defesa",
+        "Consolidação dos resultados",
+        5, 6, "thesis"
+      ]
+    ]
+  }
+
+];
+
+/* ===================================
+   GERACAO DAS LINHAS DO GANTT
+=================================== */
+
+const container =
+  document.getElementById("gantt-content");
+
+groups.forEach(group => {
+
+  const heading =
+    document.createElement("div");
+
+  heading.className = "group";
+  heading.textContent = group.title;
+
+  container.appendChild(heading);
+
+  group.tasks.forEach(
+    ([name, detail, start, end, type]) => {
+
+      const row =
+        document.createElement("div");
+
+      row.className = "gantt-row";
+
+      const label =
+        document.createElement("div");
+
+      label.className = "task-name";
+      label.textContent = name;
+
+      const small =
+        document.createElement("small");
+
+      small.textContent = detail;
+      label.appendChild(small);
+
+      const timeline =
+        document.createElement("div");
+
+      timeline.className = "timeline";
+
+      const bar =
+        document.createElement("div");
+
+      bar.className = "bar " + type;
+
+      bar.style.gridColumn =
+        `${start} / ${end + 1}`;
+
+      bar.title =
+        `${name} — ${detail}`;
+
+      timeline.appendChild(bar);
+
+      row.appendChild(label);
+      row.appendChild(timeline);
+
+      container.appendChild(row);
+
+    }
+  );
+
+});
+
+/* ===================================
+   MARCO DE DEFESA DA TESE
+=================================== */
+
+const defense =
+  document.createElement("div");
+
+defense.className =
+  "gantt-row milestone-row";
+
+const defenseLabel =
+  document.createElement("div");
+
+defenseLabel.className = "task-name";
+
+defenseLabel.innerHTML =
+  "Defesa da tese" +
+  "<small>15/12/2028 · meta provisória</small>";
+
+const defenseLine =
+  document.createElement("div");
+
+defenseLine.className = "milestone-line";
+
+const diamond =
+  document.createElement("div");
+
+diamond.className = "diamond";
+
+diamond.title =
+  "Defesa da tese — 15/12/2028";
+
+defenseLine.appendChild(diamond);
+
+defense.appendChild(defenseLabel);
+defense.appendChild(defenseLine);
+
+container.appendChild(defense);
+
+</script>
+
+</body>
+</html>
